@@ -1,4 +1,3 @@
-     
         function time_ago(predate){
             
             var out='';
@@ -36,3 +35,15 @@
             
             return(out);            
         }
+// function generateRandomString(id) {
+//   var text = "";
+//   var text_n = "";
+//   var possible = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+//   for (var i = 0; i < 10; i++)
+//     text += possible.charAt(Math.floor(Math.random() * possible.length));
+// for (var i = 0; i < 10; i++)
+//     text_n += possible.charAt(Math.floor(Math.random() * possible.length));
+// var out = text+id+text_n;
+//  return(out);
+// }

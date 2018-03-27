@@ -12,7 +12,7 @@
         <link href="<?php $base_url; ?>assets/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
         <link href="<?php $base_url; ?>assets/css/animate.css" rel="stylesheet">
         <link href="<?php $base_url; ?>assets/css/style.css" rel="stylesheet">
-
+        <script src="<?php $base_url; ?>assets/time_ago.js"></script>
     </head>
 
     <body>
@@ -50,24 +50,28 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                 <?php $this->load->view('encription'); ?>
                                                 <?php
                                                 $cnt = 0;
                                                 foreach ($users as $row) {
                                                     $cnt++;
                                                     ?>
                                                     <tr id="<?php echo $row->user_id; ?>" <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
-                                                        <td><?php echo $cnt; ?></td>
-                                                        <!--<td><?php // echo $row->time;   ?></td>-->
+                                                        <td><?php echo $cnt; ?></td>   
                                                         <td><?php echo $row->firstname; ?></td>                    
                                                         <td><?php echo $row->gender; ?></td>
                                                         <td><?php echo $row->nationality; ?></td>
                                                         <td><?php echo $row->phone; ?></td>
-                                                        <td><?php echo $row->email; ?></td>                    
+                                                        <td><?php echo $row->email; ?></td>            
                                                         <td><?php echo $row->superpower; ?></td>
                                                         <td>
-                                                            <a href="<?php $base_url ?>previlage?id=<?php echo $row->user_id; ?>"><i class="fa fa-lock fa-2x"></i></a>                   
-                                                            <a href="<?php $base_url ?>user_details?id=<?php echo $row->user_id; ?>"><i class="fa fa-book fa-2x"></i></a>                   
-                                                            <a onclick="delete_item('<?php echo $row->user_id; ?>')"><i class="fa fa-trash fa-2x"></i></a>                   
+                                                            <a href="<?php $base_url ?>previlage?id=<?php echo $row->user_id; ?>"><i class="fa fa-lock fa-2x"></i></a>   
+                                                            <a href="<?php $base_url ?>user_details?id=<?php echo generateRandomString($row->user_id); ?>"><i class="fa fa-book fa-2x"></i></a>                   
+                                                            <a onclick="delete_item('<?php echo $row->user_id; ?>')"><i class="fa fa-trash fa-2x"></i></a>
+
+
+
+
                                                         </td>
                                                     </tr>   
                                                 <?php } ?>

@@ -107,6 +107,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                     <?php $this->load->view('encription'); ?>
                                                     <?php
                                                     $cnt = 0;
                                                     foreach ($volunteer as $row) {
@@ -126,7 +127,7 @@
                                                             <td><?php echo $row->phone; ?></td>
                                                             <td><?php echo $row->email; ?></td>                    
                                                             <td><?php echo $row->superpower; ?></td>
-                                                            <td><a href="<?php $base_url ?>profile?id=<?php echo $row->id; ?>"><i class="fa fa-address-book fa-2x"></i></a>  </td>
+                                                            <td><a href="<?php $base_url ?>profile?id=<?php echo generateRandomString($row->id); ?>"><i class="fa fa-address-book fa-2x"></i></a>  </td>
                                                         </tr>   
                                                     <?php } ?>
 

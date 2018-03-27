@@ -217,7 +217,7 @@
                                     <div class="feed-element">                                                                           
                                         <div class="media-body ">
                                             <small  class="pull-right">
-                                         <?php echo "<script type='text/javascript'>  document.write(time_ago('3/25/2018 08:0:0'));</script>"; ?>
+                                         <?php echo "<script type='text/javascript'>  document.write(time_ago('$row->date'));</script>"; ?>
                                              </small>                          
                                             <strong><?php echo $d[0]->firstname; ?></strong><br>
                                             <small class="text-muted"><?php echo $row->date; ?></small>
@@ -264,7 +264,11 @@
         function comments(volun) {
             $('#comm').empty();
             var reminder=$('#reminder').val();
-            var pro=<?php echo $_REQUEST['id']; ?>;
+            var pro=<?php  $str = $_REQUEST['id'];
+        $str2 = substr($str, 10);
+        $id = substr($str2, 0, -10); 
+echo $id;
+        ?>;
             $.ajax({
         type: "POST",
         url: "<?php $base_url ?>Profile/reminder",
