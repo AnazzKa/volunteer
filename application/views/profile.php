@@ -159,7 +159,8 @@
                                             <option <?php if ($volunteer[0]->seleted_or_not == 3) { ?>selected <?php } ?> value="3">InActive</option>
                                         <?php } ?>
                                     </select> 
-                                    <a href="<?php $base_url; ?>profile_print?id=<?php echo $volunteer[0]->id ?>" target="_blank" > 
+                                    <?php $this->load->view('encription'); ?>
+                                    <a href="<?php $base_url; ?>profile_print?id=<?php $pri_id=$volunteer[0]->id; echo generateRandomString($pri_id); ?>" target="_blank" > 
                                         <button type="button" name="selected" class="btn btn-success pull-right" ><i class="fa fa-print"></i> </button></a>
                                 </form>
                                 <div class="row m-t-lg" style="padding:10px;">                                   
