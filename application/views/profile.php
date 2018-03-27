@@ -9,6 +9,8 @@
         <link href="<?php $base_url; ?>assets/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
         <link href="<?php $base_url; ?>assets/css/animate.css" rel="stylesheet">
         <link href="<?php $base_url; ?>assets/css/style.css" rel="stylesheet">
+        <script src="<?php $base_url; ?>assets/time_ago.js"></script>
+   
     </head>
     <body>
 
@@ -199,7 +201,7 @@
                                     <h5 class="col-md-3" style="padding-bottom:3%">: <?php echo $volunteer[0]->phone; ?></h5>
 <br>
                                     <!-- <form action="" method="post"> -->
-                                        <input type="hidden" value="<?php echo $volunteer[0]->id ?>" name="volunteer_id" >                                                                            <h3 style="color:#115E6E;"> <strong>Notes</strong> </h3>
+                                        <input type="hidden" value="<?php echo $volunteer[0]->id ?>" name="volunteer_id" >                                                                            <h3  style="color:#115E6E;"> <strong>Notes</strong> </h3>
                                         <textarea placeholder="Notes" name="reminder" id="reminder"  class="form-control" ></textarea>                                        
                                         <input onclick="comments(<?php echo $volunteer[0]->id ?>)" name="rem_btn" value="Save" class="btn btn-primary pull-right" >
                                     <!-- </form> -->
@@ -213,7 +215,10 @@
                                     
                                     ?>
                                     <div class="feed-element">                                                                           
-                                        <div class="media-body ">                                       
+                                        <div class="media-body ">
+                                            <small  class="pull-right">
+                                         <?php echo "<script type='text/javascript'>  document.write(time_ago('3/25/2018 08:0:0'));</script>"; ?>
+                                             </small>                          
                                             <strong><?php echo $d[0]->firstname; ?></strong><br>
                                             <small class="text-muted"><?php echo $row->date; ?></small>
                                             <div class="well">
@@ -274,5 +279,6 @@ $('#reminder').val('');
     });
         }
     </script>
+    
 </body>
 </html>
