@@ -63,6 +63,8 @@ class Users extends CI_Controller {
                     $dataInfo1[] = $this->upload->data();
                 endif;
             }
+            $password=$this->input->post('password');
+            $encr_password=md5($password);
             $query = array(
                 'time' => date('Y-m-d H:i:s'),
                 'firstname' => $this->input->post('F_Name'),
@@ -73,7 +75,7 @@ class Users extends CI_Controller {
                 'phone' => $this->input->post('Phone'),
                 'email' => $this->input->post('email'),
                 'superpower' => $this->input->post('superpower'),
-                'password' => $this->input->post('password'),
+                'password' => $encr_password,
                 'emirates_id' => $dataInfo[0]['file_name'],
                 'passport_copy' => $dataInfo1[0]['file_name'],
                 'designation_id' => 0,
@@ -327,7 +329,12 @@ class Users extends CI_Controller {
         if (!isset($_GET['id']))
             $query = "SELECT * FROM `al_volunteer` WHERE `id`!='' and seleted_or_not=0 ";
         else
-            $query = "SELECT * FROM `al_volunteer` WHERE `id`!='' and seleted_or_not='" . $_GET['id'] . "'";
+        {
+            $str = $_REQUEST['id'];
+        $str2 = substr($str, 10);
+        $id = substr($str2, 0, -10);
+            $query = "SELECT * FROM `al_volunteer` WHERE `id`!='' and seleted_or_not='" .$id. "'";
+        }
 
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $this->load->view('volunteer_print', $data);

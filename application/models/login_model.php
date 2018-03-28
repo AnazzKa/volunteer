@@ -14,8 +14,10 @@ class Login_model extends CI_Model {
 
     public function validate() {
         // grab user input
+        $password=$this->security->xss_clean($this->input->post('password'));
+        $encr_password=md5($password);
         $username = $this->security->xss_clean($this->input->post('username'));
-        $password = $this->security->xss_clean($this->input->post('password'));
+        
 //        $roll = $this->security->xss_clean($this->input->post('roll'));
 //        if ($roll == 1) {
 //            // Prep the query
@@ -43,7 +45,7 @@ class Login_model extends CI_Model {
 //        if ($roll == 2) {
             // Prep the query
             $this->db->where('email', $username);
-            $this->db->where('password', $password);
+            $this->db->where('password', $encr_password);
             // Run the query
             $query = $this->db->get('al_users');
             // Let's check if there are any results
