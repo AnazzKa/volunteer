@@ -56,7 +56,7 @@
                                             <div class="col-sm-6 b-r">                                                                
                                                 <div class="form-group col-md-6">
                                                     <label>First Name</label> 
-                                                    <input type="text" name="F_Name" placeholder="First Name" class="form-control">
+                                                    <input required type="text" name="F_Name" placeholder="First Name" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label>Lsat Name</label> 
@@ -77,7 +77,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Email</label> 
-                                                    <input type="email" name="email" placeholder="Enter Email" class="form-control">
+                                                    <input required type="email" name="email" placeholder="Enter Email" class="form-control">
                                                 </div>
                                                 <div>
                                                     <button class="btn btn-sm btn-primary pull-right m-t-n-xs" name="save" type="submit"><strong>Save</strong></button>            
@@ -87,7 +87,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Password</label> 
-                                                    <input type="password" name="password"  class="form-control">
+                                                    <input required type="password" name="password"  class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Nationality</label> 
@@ -107,11 +107,11 @@
                                                 </div>                                                
                                                 <div class="form-group">
                                                     <label>Emirates_id</label> 
-                                                    <input type="file" name="Emirates_id[]" multiple  class="form-control">
+                                                    <input required type="file" name="Emirates_id[]" multiple  class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>passport_copy</label> 
-                                                    <input type="file" name="passport_copy[]" multiple placeholder="passport_copy" class="form-control">
+                                                    <input required type="file" name="passport_copy[]" multiple placeholder="passport_copy" class="form-control">
                                                 </div>
                                             </div>
                                         </form>

@@ -26,8 +26,8 @@ class Users extends CI_Controller {
         $data['title'] = 'Users';
         if (isset($_POST['save'])) {
 
-
-            $this->load->library('upload');
+            $config['allowed_types']        = 'gif|jpg|png';
+            $this->load->library('upload', $config);
             $dataInfo = array();
             $dataInfo1 = array();
             $files = $_FILES;
@@ -65,6 +65,7 @@ class Users extends CI_Controller {
             }
             $password=$this->input->post('password');
             $encr_password=md5($password);
+            if(!empty($dataInfo[0]['file_name']) && !empty($dataInfo1[0]['file_name'])){
             $query = array(
                 'time' => date('Y-m-d H:i:s'),
                 'firstname' => $this->input->post('F_Name'),
@@ -83,19 +84,14 @@ class Users extends CI_Controller {
                 'creatd_user_id' => $this->session->userdata('userid')
             );
             $result = $this->users_model->add($query);
-            // Now we verify the result
             if (!$result) {
-                // If user did not validate, then show them login page again
                 $data['msg'] = 'Data Saved Sucessfully';
-
-//                $this->load->view('login', $data);
             } else {
                 $data['msg'] = 'Insertion Error';
-                // If user did validate, 
-                // Send them to members area
-//            redirect('dashboard');
-//                header('Location:dashboard');
             }
+        }else{
+             $data['msg'] = 'Only Image Format';
+        }
         }
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('user_add', $data);
@@ -343,7 +339,10 @@ class Users extends CI_Controller {
     public function previlage() {
         $data['msg'] = '';
         $data['title'] = 'Volunteer';
-        $data['user_id'] = $_REQUEST['id'];
+        $str = $_REQUEST['id'];
+        $str2 = substr($str, 10);
+        $id = substr($str2, 0, -10);
+        $data['user_id'] = $id;
         if (isset($_POST['submit'])) {
             $cpt = count($_POST['chk']);
             for ($i = 0; $i < $cpt; $i++) {
@@ -409,7 +408,10 @@ class Users extends CI_Controller {
     }
     public function delete()
     {
-        $id= $_POST['user_id'];
+        
+        $str = $_POST['user_id'];
+        $str2 = substr($str, 10);
+        $id = substr($str2, 0, -10);
         $this->users_model->delete_users($id);
     }
 }

@@ -32,6 +32,7 @@
                                     <h5>Users Details</h5>
 
                                 </div>
+                                <?php if(!empty($users)){ ?>
                                 <div class="ibox-content">
 
                                     <div class="table-responsive">
@@ -65,12 +66,9 @@
                                                         <td><?php echo $row->email; ?></td>            
                                                         <td><?php echo $row->superpower; ?></td>
                                                         <td>
-                                                            <a href="<?php $base_url ?>previlage?id=<?php echo $row->user_id; ?>"><i class="fa fa-lock fa-2x"></i></a>   
+                                                            <a href="<?php $base_url ?>previlage?id=<?php echo generateRandomString($row->user_id); ?>"><i class="fa fa-lock fa-2x"></i></a>   
                                                             <a href="<?php $base_url ?>user_details?id=<?php echo generateRandomString($row->user_id); ?>"><i class="fa fa-book fa-2x"></i></a>                   
-                                                            <a onclick="delete_item('<?php echo $row->user_id; ?>')"><i class="fa fa-trash fa-2x"></i></a>
-
-
-
+                                                            <a onclick="delete_item('<?php echo generateRandomString($row->user_id); ?>')"><i class="fa fa-trash fa-2x"></i></a>
 
                                                         </td>
                                                     </tr>   
@@ -96,6 +94,20 @@
                                     </div>
 
                                 </div>
+                                <?php }else{ ?>
+<div class="col-lg-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title gray-bg">
+                                    <h5>No Data Found</h5>
+                                    <div class="ibox-tools">
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+               <?php } ?>
                             </div>
                         </div>
                     </div>

@@ -33,60 +33,9 @@
                                         <h5>Contact Details</h5>                        
                                     </div>
 
-                                    <!--                                    <div class="ibox-content col-md-12">
-                                                                                <div class="form-group col-md-4">                                    
-                                                                                    <input type="text" placeholder="From Date" onfocus="(this.type='date')"  value="<?php echo $f_date; ?>" name="f_date" class="form-control">                                            
-                                                                                </div>
                                     
-                                                                                <div class="form-group col-md-4">                                    
-                                                                                    <input type="text" placeholder="To Date" onfocus="(this.type='date')"  value="<?php echo $t_date; ?>" name="t_date" class="form-control">                                            
-                                                                                </div>
-                                                                                <div class="form-group col-md-4">                                    
-                                                                                    <select name="gender" class="form-control">
-                                                                                        <option <?php if ($s_gender == '') { ?>selected<?php } ?> value="">Gender</option>
-                                                                                        <option <?php if ($s_gender == 'male') { ?>selected<?php } ?> value="male">Male</option>
-                                                                                        <option <?php if ($s_gender == 'female') { ?>selected<?php } ?> value="female">Female</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div class="form-group col-md-4">
-                                                                                    <select name="nationality" class="form-control">
-                                                                                        <option value="">Nationality</option>
-                                    <?php foreach ($nationality as $row) { ?>
-                                                                                                    <option <?php if ($s_nationality == $row->nationality) { ?>selected<?php } ?> value="<?php echo $row->nationality ?>"><?php echo $row->nationality ?></option>
-                                    <?php }
-                                    ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div class="form-group col-md-4">
-                                                                                    <select name="super_power" class="form-control">
-                                                                                        <option <?php if ($s_superpower == '') { ?>selected<?php } ?> value="">Super Power</option>                                                
-                                                                                        <option <?php if ($s_superpower == 'Art and craft') { ?>selected<?php } ?> value="Art and craft">Art and craft </option>
-                                                                                        <option <?php if ($s_superpower == 'Balloon Artist') { ?>selected<?php } ?> value="Balloon Artist">Balloon Artist</option>
-                                                                                        <option <?php if ($s_superpower == 'Beat Boxing') { ?>selected<?php } ?> value="Beat Boxing">Beat Boxing </option>
-                                                                                        <option <?php if ($s_superpower == 'Caricaturist') { ?>selected<?php } ?> value="Caricaturist">Caricaturist</option>
-                                                                                        <option <?php if ($s_superpower == 'Circus acts') { ?>selected<?php } ?> value="Circus acts">Circus acts </option>
-                                                                                        <option <?php if ($s_superpower == 'Dancer') { ?>selected<?php } ?> value="Dancer">Dancer </option>
-                                                                                        <option <?php if ($s_superpower == 'Juggler') { ?>selected<?php } ?> value="Juggler">Juggler </option>
-                                                                                        <option <?php if ($s_superpower == 'Magician') { ?>selected<?php } ?> value="Magician ">Magician </option>
-                                                                                        <option <?php if ($s_superpower == 'Musical instrument player') { ?>selected<?php } ?> value="Musical instrument player">Musical instrument player</option>
-                                                                                        <option <?php if ($s_superpower == 'Painter') { ?>selected<?php } ?> value="Painter">Painter </option>
-                                                                                        <option <?php if ($s_superpower == 'Photography/videography') { ?>selected<?php } ?> value="Photography/videography">Photography/videography</option>
-                                                                                        <option <?php if ($s_superpower == 'Scientist') { ?>selected<?php } ?> value="Scientist">Scientist </option>
-                                                                                        <option <?php if ($s_superpower == 'Singer') { ?>selected<?php } ?> value="Singer">Singer</option>
-                                                                                        <option <?php if ($s_superpower == 'Storytelling') { ?>selected<?php } ?> value="Storytelling">Storytelling </option>
-                                                                                        <option <?php if ($s_superpower == 'Ventriloquist') { ?>selected<?php } ?> value="Ventriloquist">Ventriloquist</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div class="form-group col-md-4">                                    
-                                                                                    <input type="hidden" value="<?php echo $s_name_phone; ?>" name="name_phone" placeholder="Name/phone" class="form-control">
-                                                                                    <input type="hidden" value="<?php echo $s_sort ?>" name="sort">
-                                                                                    <button class="btn btn-primary" name="reset" type="reset"><i class="fa fa-undo"></i></button>
-                                                                                <button class="btn btn-primary" name="search" type="submit"><i class="fa fa-search"></i></button>
-                                                                                <a href="<?php $base_url; ?>volunteer_print" target="_blank"> <button id="btnPrint" class="btn btn-primary" name="print" type="button"><i class="fa fa-print"></i></button></a>
-                                                                                </div>
-                                                                        </div>-->
 
-
+<?php if(!empty($contacts)){ ?>
                                     <div class="ibox-content">
                                         <div class="table-responsive" id="dvContents">
                                             <table class="table dataTables-example" >
@@ -161,6 +110,20 @@
                                         </div>
 
                                     </div>
+                                    <?php }else{ ?>
+<div class="col-lg-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title gray-bg">
+                                    <h5>No Data Found</h5>
+                                    <div class="ibox-tools">
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+               <?php } ?>
                                 </form>
                             </div>
                         </div>

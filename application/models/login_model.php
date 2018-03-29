@@ -23,7 +23,7 @@ class Login_model extends CI_Model {
 //            // Prep the query
 //            $this->db->where('username', $username);
 //            $this->db->where('password', $password);
-////            $this->db->where('user_cat', $roll);
+//            $this->db->where('user_cat', $roll);
 //
 //            // Run the query
 //            $query = $this->db->get('al_login');

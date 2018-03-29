@@ -34,7 +34,7 @@
                                     </div>
 
 
-
+<?php if(!empty($appointment)){ ?>
 
                                     <div class="ibox-content">
                                         <div class="table-responsive" id="dvContents">
@@ -103,6 +103,20 @@
                                             </div>
 
                                         </div>
+                                        <?php }else{ ?>
+<div class="col-lg-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title gray-bg">
+                                    <h5>No Data Found</h5>
+                                    <div class="ibox-tools">
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+               <?php } ?>
                                     </form>
                                 </div>
                             </div>
