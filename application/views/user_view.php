@@ -51,7 +51,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                 <?php $this->load->view('encription'); ?>
+                                                 
                                                 <?php
                                                 $cnt = 0;
                                                 foreach ($users as $row) {
@@ -66,9 +66,9 @@
                                                         <td><?php echo $row->email; ?></td>            
                                                         <td><?php echo $row->superpower; ?></td>
                                                         <td>
-                                                            <a href="<?php $base_url ?>previlage?id=<?php echo generateRandomString($row->user_id); ?>"><i class="fa fa-lock fa-2x"></i></a>   
-                                                            <a href="<?php $base_url ?>user_details?id=<?php echo generateRandomString($row->user_id); ?>"><i class="fa fa-book fa-2x"></i></a>                   
-                                                            <a onclick="delete_item('<?php echo generateRandomString($row->user_id); ?>')"><i class="fa fa-trash fa-2x"></i></a>
+                                                            <a href="<?php $base_url ?>previlage?id=<?php echo my_simple_crypt($row->user_id,'e'); ?>"><i class="fa fa-lock fa-2x"></i></a>   
+                                                            <a href="<?php $base_url ?>user_details?id=<?php echo my_simple_crypt($row->user_id,'e'); ?>"><i class="fa fa-book fa-2x"></i></a>                   
+                                                            <a onclick="delete_item('<?php echo my_simple_crypt($row->user_id,'e'); ?>')"><i class="fa fa-trash fa-2x"></i></a>
 
                                                         </td>
                                                     </tr>   

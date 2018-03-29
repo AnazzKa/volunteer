@@ -1,31 +1,26 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Profile extends CI_Controller {
-
     function __construct() {
         parent::__construct();
         $this->load->helper('form');
         $this->load->helper('url');
+        $this->load->helper('encription');
         $this->load->model('users_model');
         $this->load->model('privilege_model');
         $this->check_isvalidated();
     }
-
     private function check_isvalidated() {
         if (!$this->session->userdata('validated')) {
             header('Location:Login');
         }
     }
-
     public function index() {
         $data['msg'] = '';
         $data['title'] = 'Profile';
         $str = $_REQUEST['id'];
-        $str2 = substr($str, 10);
-        $id = substr($str2, 0, -10);
+        $id = my_simple_crypt($str, 'd');       
         if (isset($_POST['status'])) {
             $volunteer_id = $_POST['volunteer_id'];
             $status = $_POST['status'];
@@ -63,16 +58,13 @@ class Profile extends CI_Controller {
         $data['volunteer'] = $this->users_model->get_single_user($id);
         $this->load->view('profile', $data);
     }
-
     public function profile_print() {
         $data['title'] = 'Profile';
-        $str = $_REQUEST['id'];
-        $str2 = substr($str, 10);
-        $id = substr($str2, 0, -10);
+        $str = $_REQUEST['id']; 
+        $id = my_simple_crypt($str,'d');
         $data['volunteer'] = $this->users_model->get_single_user($id);
         $this->load->view('profile_print', $data);
     }
-
     public function reminder() {
         if (isset($_POST['volun']) && isset($_POST['reminder'])) {
             $volunteer_id = $_POST['volun'];
@@ -103,5 +95,4 @@ class Profile extends CI_Controller {
             echo $arr;
         }
     }
-
 }

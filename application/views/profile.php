@@ -160,8 +160,8 @@
                                             <option <?php if ($volunteer[0]->seleted_or_not == 3) { ?>selected <?php } ?> value="3">InActive</option>
                                         <?php } ?>
                                     </select> 
-                                    <?php $this->load->view('encription'); ?>
-                                    <a href="<?php $base_url; ?>profile_print?id=<?php $pri_id=$volunteer[0]->id; echo generateRandomString($pri_id); ?>" target="_blank" > 
+                                    
+                                    <a href="<?php $base_url; ?>profile_print?id=<?php $pri_id=$volunteer[0]->id; echo my_simple_crypt($pri_id,'e'); ?>" target="_blank" > 
                                         <button type="button" name="selected" class="btn btn-success pull-right" ><i class="fa fa-print"></i> </button></a>
                                 </form>
                                 <div class="row m-t-lg" style="padding:10px;">                                   
@@ -218,9 +218,7 @@
                                     ?>
                                     <div class="feed-element">                                                                           
                                         <div class="media-body ">
-                                            <small  class="pull-right">
-                                         <?php echo "<script type='text/javascript'>  document.write(time_ago('$row->date'));</script>"; ?>
-                                             </small>                          
+                                                                     
                                             <strong><?php echo $d[0]->firstname; ?></strong><br>
                                             <small class="text-muted"><?php echo $row->date; ?></small>
                                             <div class="well">

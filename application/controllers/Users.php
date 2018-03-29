@@ -1,32 +1,27 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Users extends CI_Controller {
-
     function __construct() {
         parent::__construct();
         $this->load->helper('form');
         $this->load->helper('url');
+        $this->load->helper('encription');
         $this->load->model('users_model');
         $this->load->model('privilege_model');
         $this->check_isvalidated();
     }
-
     private function check_isvalidated() {
         if (!$this->session->userdata('validated')) {
             header('Location:Login');
         }
     }
-
     public function index() {
-
         $data['msg'] = '';
         $data['title'] = 'Users';
         if (isset($_POST['save'])) {
 
-            $config['allowed_types']        = 'gif|jpg|png';
+            $config['allowed_types'] = 'gif|jpg|png';
             $this->load->library('upload', $config);
             $dataInfo = array();
             $dataInfo1 = array();
@@ -63,40 +58,39 @@ class Users extends CI_Controller {
                     $dataInfo1[] = $this->upload->data();
                 endif;
             }
-            $password=$this->input->post('password');
-            $encr_password=md5($password);
-            if(!empty($dataInfo[0]['file_name']) && !empty($dataInfo1[0]['file_name'])){
-            $query = array(
-                'time' => date('Y-m-d H:i:s'),
-                'firstname' => $this->input->post('F_Name'),
-                'lastname' => $this->input->post('L_Name'),
-                'birthday' => $this->input->post('Birthday'),
-                'gender' => $this->input->post('Gender'),
-                'nationality' => $this->input->post('Nationality'),
-                'phone' => $this->input->post('Phone'),
-                'email' => $this->input->post('email'),
-                'superpower' => $this->input->post('superpower'),
-                'password' => $encr_password,
-                'emirates_id' => $dataInfo[0]['file_name'],
-                'passport_copy' => $dataInfo1[0]['file_name'],
-                'designation_id' => 0,
-                'activated' => 1,
-                'creatd_user_id' => $this->session->userdata('userid')
-            );
-            $result = $this->users_model->add($query);
-            if (!$result) {
-                $data['msg'] = 'Data Saved Sucessfully';
+            $password = $this->input->post('password');
+            $encr_password = md5($password);
+            if (!empty($dataInfo[0]['file_name']) && !empty($dataInfo1[0]['file_name'])) {
+                $query = array(
+                    'time' => date('Y-m-d H:i:s'),
+                    'firstname' => $this->input->post('F_Name'),
+                    'lastname' => $this->input->post('L_Name'),
+                    'birthday' => $this->input->post('Birthday'),
+                    'gender' => $this->input->post('Gender'),
+                    'nationality' => $this->input->post('Nationality'),
+                    'phone' => $this->input->post('Phone'),
+                    'email' => $this->input->post('email'),
+                    'superpower' => $this->input->post('superpower'),
+                    'password' => $encr_password,
+                    'emirates_id' => $dataInfo[0]['file_name'],
+                    'passport_copy' => $dataInfo1[0]['file_name'],
+                    'designation_id' => 0,
+                    'activated' => 1,
+                    'creatd_user_id' => $this->session->userdata('userid')
+                );
+                $result = $this->users_model->add($query);
+                if (!$result) {
+                    $data['msg'] = 'Data Saved Sucessfully';
+                } else {
+                    $data['msg'] = 'Insertion Error';
+                }
             } else {
-                $data['msg'] = 'Insertion Error';
+                $data['msg'] = 'Only Image Format';
             }
-        }else{
-             $data['msg'] = 'Only Image Format';
-        }
         }
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('user_add', $data);
     }
-
     private function set_upload_options() {
         //upload an image options
         $config = array();
@@ -104,10 +98,8 @@ class Users extends CI_Controller {
         $config['allowed_types'] = 'gif|jpg|png|PNG';
         $config['max_size'] = '45058';
         $config['overwrite'] = FALSE;
-
         return $config;
     }
-
     public function view() {
 
         $data['msg'] = '';
@@ -115,7 +107,6 @@ class Users extends CI_Controller {
         $data['users'] = $this->users_model->get_users();
         $this->load->view('user_view', $data);
     }
-
     public function volunteer_view() {
 
         $data['msg'] = '';
@@ -162,12 +153,10 @@ class Users extends CI_Controller {
                     $data['s_sort'] = 'ASC';
             }
         }
-
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('volunteer_view', $data);
     }
-
     public function selected_volunteers() {
 
         $data['msg'] = '';
@@ -213,14 +202,11 @@ class Users extends CI_Controller {
                     $data['s_sort'] = 'ASC';
             }
         }
-
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('volunteer_view', $data);
     }
-
     public function clearance_volunteers() {
-
         $data['msg'] = '';
         $data['status'] = 2;
         $data['title'] = 'Volunteer';
@@ -264,12 +250,10 @@ class Users extends CI_Controller {
                     $data['s_sort'] = 'ASC';
             }
         }
-
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('volunteer_view', $data);
     }
-
     public function inactive_volunteers() {
 
         $data['msg'] = '';
@@ -315,33 +299,27 @@ class Users extends CI_Controller {
                     $data['s_sort'] = 'ASC';
             }
         }
-
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('volunteer_view', $data);
     }
-
     public function volunteer_print() {
         if (!isset($_GET['id']))
-            $query = "SELECT * FROM `al_volunteer` WHERE `id`!='' and seleted_or_not=0 ";
-        else
-        {
+        //$query = "SELECT * FROM `al_volunteer` WHERE `id`!='' and seleted_or_not=0 ";
+            $query;
+        else {
             $str = $_REQUEST['id'];
-        $str2 = substr($str, 10);
-        $id = substr($str2, 0, -10);
-            $query = "SELECT * FROM `al_volunteer` WHERE `id`!='' and seleted_or_not='" .$id. "'";
+            $id = my_simple_crypt($str, 'd');
+            $query = "SELECT * FROM `al_volunteer` WHERE `id`!='' and seleted_or_not='" . $id . "'";
         }
-
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $this->load->view('volunteer_print', $data);
     }
-
     public function previlage() {
         $data['msg'] = '';
         $data['title'] = 'Volunteer';
         $str = $_REQUEST['id'];
-        $str2 = substr($str, 10);
-        $id = substr($str2, 0, -10);
+        $id = my_simple_crypt($str, 'd');
         $data['user_id'] = $id;
         if (isset($_POST['submit'])) {
             $cpt = count($_POST['chk']);
@@ -360,7 +338,6 @@ class Users extends CI_Controller {
         }
         $this->load->view('previlage', $data);
     }
-
     public function menus() {
         $data['msg'] = '';
         $data['title'] = 'Module Creation';
@@ -384,7 +361,6 @@ class Users extends CI_Controller {
         $data['parent_module'] = $this->privilege_model->get_parent_modules();
         $this->load->view('module_creation', $data);
     }
-
     public function notifications() {
         $data['msg'] = '';
         $data['title'] = 'Notification';
@@ -406,12 +382,10 @@ class Users extends CI_Controller {
         $data['notification'] = $this->users_model->get_notification();
         $this->load->view('notification', $data);
     }
-    public function delete()
-    {
-        
-        $str = $_POST['user_id'];
-        $str2 = substr($str, 10);
-        $id = substr($str2, 0, -10);
+    public function delete() {
+
+        $str = $_REQUEST['id'];
+        $id = my_simple_crypt($str, 'd');
         $this->users_model->delete_users($id);
     }
 }

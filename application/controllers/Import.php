@@ -1,10 +1,7 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Import extends CI_Controller {
-
     function __construct() {
         parent::__construct();
         $this->load->helper('form');
@@ -13,7 +10,6 @@ class Import extends CI_Controller {
         $this->load->model('import_model');
         $this->load->model('privilege_model');
     }
-
     public function index() {
         $data['title'] = "Dashboard";
         $data['msg'] = '';
@@ -30,7 +26,6 @@ class Import extends CI_Controller {
         }
         $this->load->view('import_db', $data);
     }
-
     public function import_table() {
         $db_o = 'wp_volunteer';
         $db_t = 'al_volunteer';
@@ -38,5 +33,4 @@ class Import extends CI_Controller {
         $result = $this->import_model->import_data_base($db_o, $db_t, $pri);
         redirect($_SERVER['HTTP_REFERER']);
     }
-
 }

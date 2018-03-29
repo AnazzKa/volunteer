@@ -1,2 +1,2 @@
 
-    <title>Al Jalila | <?php echo $title; ?></title>
+<title>Al Jalila | <?php echo $title; ?></title>

@@ -1,10 +1,7 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Welcome extends CI_Controller {
-
     /**
      * Index Page for this controller.
      *
@@ -24,7 +21,6 @@ class Welcome extends CI_Controller {
         parent::__construct();
 //        $this->load->library('encrypt');
     }
-
     public function index() {
 //        $msg = 'My secret message';
 //
@@ -32,8 +28,6 @@ class Welcome extends CI_Controller {
 //        echo $encrypted_string;
 		$this->load->view('welcome_message');
     }
-
 }
-
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */

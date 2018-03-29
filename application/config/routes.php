@@ -56,6 +56,7 @@ $route['inactive_volunteers'] = 'Users/inactive_volunteers';
 $route['menus'] = 'Users/menus';
 $route['notifications'] = 'Users/notifications';
 $route['import'] = 'Import';
+$route['seminar_registration'] = 'seminar_registration';
 
 $route['404_override'] = '';
 

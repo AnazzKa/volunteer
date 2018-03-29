@@ -1,10 +1,7 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Dashboard extends CI_Controller {
-
     function __construct() {
         parent::__construct();
         $this->load->helper('form');
@@ -14,7 +11,6 @@ class Dashboard extends CI_Controller {
         $this->load->model('privilege_model');
         $this->check_isvalidated();
     }
-
     public function index() {
         $data['title'] = "Dashboard";
         $data['msg'] = '';
@@ -55,9 +51,7 @@ class Dashboard extends CI_Controller {
        $data['reg_bar'] = $this->bar_registerd($year);
         
     }
-
     public function bar_registerd($y) {
-//        $y = "2018";
         $r = "";
         for ($i = 1; $i <= 12; $i++) {
             $registerd[] = $this->dashboard_model->get_count_registerd($y, $i);
@@ -69,7 +63,6 @@ class Dashboard extends CI_Controller {
         return $r;
     }
     public function bar_approved($y) {
-//        $y = "2017";
         $r = "";
         for ($i = 1; $i <= 12; $i++) {
             $registerd[] = $this->dashboard_model->get_count_approved($y, $i);
@@ -81,7 +74,6 @@ class Dashboard extends CI_Controller {
         return $r;
     }
     public function bar_active($y) {
-//        $y = "2017";
         $r = "";
         for ($i = 1; $i <= 12; $i++) {
             $registerd[] = $this->dashboard_model->get_count_active($y, $i);
@@ -93,7 +85,6 @@ class Dashboard extends CI_Controller {
         return $r;
     }
     public function bar_pending($y) {
-//        $y = "2017";
         $r = "";
         for ($i = 1; $i <= 12; $i++) {
             $registerd[] = $this->dashboard_model->get_count_approved($y, $i);
@@ -104,12 +95,10 @@ class Dashboard extends CI_Controller {
         $r = rtrim($r, ", ");
         return $r;
     }
-
     private function check_isvalidated() {
         $this->session->userdata('validated');
         if ($this->session->userdata('validated') == '') {
             header('Location:Login');
         }
     }
-
 }

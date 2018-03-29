@@ -20,7 +20,7 @@
         <div id="wrapper">
 
             <?php $this->load->view('menu'); ?>
- <?php $this->load->view('encription'); ?>
+
             <div id="page-wrapper" class="gray-bg">
                 <?php $this->load->view('header'); ?>
 
@@ -85,7 +85,7 @@
                                             <input type="hidden" value="<?php echo $s_sort ?>" name="sort">
                                             <button class="btn btn-primary" name="reset" type="reset"><i class="fa fa-undo"></i></button>
                                             <button class="btn btn-primary" name="search" type="submit"><i class="fa fa-search"></i></button>
-                                            <a href="<?php $base_url; ?>volunteer_print?id=<?php echo generateRandomString($status); ?>" target="_blank"> <button id="btnPrint" class="btn btn-primary" name="print" type="button"><i class="fa fa-print"></i></button></a>
+                                            <a href="<?php $base_url; ?>volunteer_print?id=<?php echo my_simple_crypt($status,'e'); ?>" target="_blank"> <button id="btnPrint" class="btn btn-primary" name="print" type="button"><i class="fa fa-print"></i></button></a>
                                         </div>
                                     </div>
 
@@ -127,7 +127,7 @@
                                                             <td><?php echo $row->phone; ?></td>
                                                             <td><?php echo $row->email; ?></td>                    
                                                             <td><?php echo $row->superpower; ?></td>
-                                                            <td><a href="<?php $base_url ?>profile?id=<?php echo generateRandomString($row->id); ?>"><i class="fa fa-address-book fa-2x"></i></a>  </td>
+                                                            <td><a href="<?php $base_url ?>profile?id=<?php echo my_simple_crypt($row->id,'e'); ?>"><i class="fa fa-address-book fa-2x"></i></a>  </td>
                                                         </tr>   
                                                     <?php } ?>
 
