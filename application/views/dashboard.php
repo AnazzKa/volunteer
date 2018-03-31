@@ -104,8 +104,8 @@
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <form action="" method="post"  > 
-                                    <button type="button" class="btn btn-danger btn-xs" id="item_1" onclick="ch(0)">2017</button>
-                                    <button type="button" class="btn btn-primary btn-xs" id="item_2" onclick="ch(1)">2018</button>
+                                    <button type="button" class="btn btn-primary btn-xs" id="item_1" onclick="ch(1)">2017</button>
+                                    <button type="button" class="btn btn-danger btn-xs" id="item_2" onclick="ch(0)">2018</button>
 <!--                                    <button type="submit" name="year" <?php
 //                                    if ($year == 2016) {
 //                                        echo "class='btn btn-danger btn-xs'";
@@ -160,19 +160,19 @@
                 app = [<?php echo $app_bar ?>];
                 act = [<?php echo $act_bar ?>];
                 inc = [<?php echo $pen_bar ?>];
-                $('#item_1').removeClass('btn-primary');
-                $('#item_2').removeClass('btn-danger');
-                $('#item_2').addClass('btn-primary');
-                $('#item_1').addClass('btn-danger');
+                $('#item_2').removeClass('btn-primary');
+                $('#item_1').removeClass('btn-danger');
+                $('#item_1').addClass('btn-primary');
+                $('#item_2').addClass('btn-danger');
             }else if(d==1){
                 reg = [<?php echo $reg_bar_1 ?>];
                 app = [<?php echo $app_bar_1 ?>];
                 act = [<?php echo $act_bar_1 ?>];
                 inc = [<?php echo $pen_bar_1 ?>];
-                $('#item_1').removeClass('btn-danger');
-                $('#item_2').removeClass('btn-primary');
-                $('#item_2').addClass('btn-danger');
-                $('#item_1').addClass('btn-primary');
+                $('#item_2').removeClass('btn-danger');
+                $('#item_1').removeClass('btn-primary');
+                $('#item_1').addClass('btn-danger');
+                $('#item_2').addClass('btn-primary');
             }
                 console.log(reg);
                 console.log(app);

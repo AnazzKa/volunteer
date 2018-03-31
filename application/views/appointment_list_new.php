@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,58 +35,67 @@
                                     </div>
 
 
-<?php if(!empty($appointment)){ ?>
+                                    <?php if (!empty($appointment)) { ?>
 
-                                    <div class="ibox-content">
-                                        <div class="table-responsive" id="dvContents">
-                                            <table class="table dataTables-example" >
-                                                <thead style="background-color:#115E6E;color:#ffff;">
-                                                    <tr>
-                                                        <th>Sl</th>
-                                                        <th>First Name</th>
-                                                        <th>Last Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Email</th>                                                  
-                                                        <th>Message</th>                                                                                                          
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    $cnt = 0;
-                                                    foreach ($appointment as $row1) {
-                                                        $cnt++;
-                                                         $tme = $row1->submit_time;
-                                                        $data['appointment_ne'] = $this->appointment_model->get_all(1, $tme);                                                        
-                                                        foreach ($data['appointment_ne'] as $row) {                                                            
-                                                            ?>
-                                                            <?php if ($row->field_order == 0) { ?>
-                                                                <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
-                                                                <?php } ?>
-                                                                <?php if ($row->field_order == 0) { ?>
-                                                                    <td><?php echo $cnt; ?></td>  
-                                                                <?php } ?>
-                                                                <?php if ($row->field_name == 'firstname') { ?>
-                                                                    <td><?php echo $row->field_value; ?></td>
-                                                                <?php } ?>
-                                                                <?php if ($row->field_name == 'lastname') { ?>
-                                                                    <td><?php echo $row->field_value; ?></td>
-                                                                <?php } ?>
-                                                                <?php if ($row->field_name == 'phonenumber') { ?>
-                                                                    <td><?php echo $row->field_value; ?></td>
-                                                                <?php } ?>
-                                                                <?php if ($row->field_name == 'contact_emailaddress') { ?>
-                                                                    <td><?php echo $row->field_value; ?></td>
-                                                                <?php } ?>
-                                                                <?php if ($row->field_name == 'appointmentmessage') { ?>
-                                                                    <td><?php echo $row->field_value; ?></td>
+                                        <div class="ibox-content">
+                                            <div class="table-responsive" id="dvContents">
+                                                <table class="table dataTables-example" >
+                                                    <thead style="background-color:#115E6E;color:#ffff;">
+                                                        <tr>
+                                                            <th>Sl</th>
+                                                            <th>Date</th>
+                                                            <th>First Name</th>
+                                                            <th>Last Name</th>
+                                                            <th>Phone</th>
+                                                            <th>Email</th>                                                  
+                                                            <th>Message</th>                                                                                                          
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $cnt = 0;
+                                                        foreach ($appointment as $row1) {
+                                                            $cnt++;
+                                                            $tme = $row1->submit_time;
+                                                            $data['appointment_ne'] = $this->appointment_model->get_all(1, $tme);
+                                                            $date = date('r', $tme);
+                                                            foreach ($data['appointment_ne'] as $row) {
+                                                                ?>
+                                                                    <?php if ($row->field_order == 0) { ?>
+                                                                    <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
+                                                                    <?php } ?>
+                                                                    <?php if ($row->field_order == 0) { ?>
+                                                                        <td><?php echo $cnt; ?></td>  
+                                                                    <?php } ?>
+                                                                        <?php if ($row->field_order == 0) { ?>
+                                                                        <td>
+                                                                            <?php $ne = new DateTime($date);
+                                                                            echo $ne->format('d-m-Y');
+                                                                            ?>
+                                                                        </td>
+                                                                    <?php } ?>
+                                                                    <?php if ($row->field_name == 'firstname') { ?>
+                                                                        <td><?php echo $row->field_value; ?></td>
+                                                                    <?php } ?>
+                                                                    <?php if ($row->field_name == 'lastname') { ?>
+                                                                        <td><?php echo $row->field_value; ?></td>
+                                                                    <?php } ?>
+                                                                    <?php if ($row->field_name == 'phonenumber') { ?>
+                                                                        <td><?php echo $row->field_value; ?></td>
+                                                                    <?php } ?>
+                                                                    <?php if ($row->field_name == 'contact_emailaddress') { ?>
+                                                                        <td><?php echo $row->field_value; ?></td>
+                                                                    <?php } ?>
+                                                                    <?php if ($row->field_name == 'appointmentmessage') { ?>
+                                                                        <td><?php echo $row->field_value; ?></td>
                                                                 <?php } ?>                                                                
                                                                 <?php if ($row->field_order == 4) { ?>    
-                                                                </tr> 
-                                                            <?php
+                                                                    </tr> 
+                                                                    <?php
+                                                                }
                                                             }
-                                                        }
-                                                        ?>
-<?php } ?>
+                                                            ?>
+    <?php } ?>
 
 
                                                     </tbody>
@@ -103,32 +113,32 @@
                                             </div>
 
                                         </div>
-                                        <?php }else{ ?>
-<div class="col-lg-12">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-title gray-bg">
-                                    <h5>No Data Found</h5>
-                                    <div class="ibox-tools">
-                                        <a class="close-link">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </div>
-                                </div>
+<?php } else { ?>
+                                        <div class="col-lg-12">
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title gray-bg">
+                                                    <h5>No Data Found</h5>
+                                                    <div class="ibox-tools">
+                                                        <a class="close-link">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+<?php } ?>
+                                </form>
                             </div>
                         </div>
-               <?php } ?>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-    <?php $this->load->view('footer'); ?>
-                </div>
 
-            <?php // $this->load->view('chat');    ?>
+                </div>
+            <?php $this->load->view('footer'); ?>
             </div>
-    <?php $this->load->view('script'); ?>
+
+        <?php // $this->load->view('chat');    ?>
+        </div>
+<?php $this->load->view('script'); ?>
         <script>
             $(document).ready(function () {
                 $('.dataTables-example').DataTable({

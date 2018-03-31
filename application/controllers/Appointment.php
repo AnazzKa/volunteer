@@ -25,7 +25,7 @@ class Appointment extends CI_Controller {
         $data['s_sort'] = 'ASC';
         $data['f_date'] = '';
         $data['t_date'] = '';
-        $data['appointment'] = $this->appointment_model->get_all(0, 0);
+        $data['appointment'] = $this->appointment_model->get_all(0, 0);       
         $this->load->view('appointment_list_new', $data);
     }
 }
