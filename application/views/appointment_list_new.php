@@ -43,7 +43,7 @@
                                                     <thead style="background-color:#115E6E;color:#ffff;">
                                                         <tr>
                                                             <th>Sl</th>
-                                                            <th>Date</th>
+                                                            <th class="date">Date</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
                                                             <th>Phone</th>
@@ -102,6 +102,7 @@
                                                     <tfoot>
                                                         <tr>
                                                             <th>Sl</th>
+                                                             <th class="date">Date</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
                                                             <th>Phone</th>

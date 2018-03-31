@@ -42,7 +42,7 @@
                                                 <thead style="background-color:#115E6E;color:#ffff;">
                                                     <tr>
                                                         <th>Sl</th>
-                                                        <!--<th>Date</th>-->
+                                                        <th class="date">Date</th>
                                                         <th>F Name</th>
                                                         <th>L Name</th>
                                                         <th>Phone</th>
@@ -59,6 +59,7 @@
                                                         $cnt++;
                                                         $tme = $row1->submit_time;
                                                         $data['contacts_ne'] = $this->contact_model->get_all(1, $tme);
+                                                         $date = date('r', $tme);
                                                         foreach ($data['contacts_ne'] as $row) {
                                                             ?>
                                                             <?php if ($row->field_order == 0) { ?>
@@ -67,6 +68,13 @@
                                                                 <?php if ($row->field_order == 0) { ?>
                                                                     <td><?php echo $cnt; ?></td>  
                                                                 <?php } ?>
+                                                                    <?php if ($row->field_order == 0) { ?>
+                                                                        <td>
+                                                                            <?php $ne = new DateTime($date);
+                                                                            echo $ne->format('d-m-Y');
+                                                                            ?>
+                                                                        </td>
+                                                                    <?php } ?>
                                                                 <?php if ($row->field_name == 'contact_first_name') { ?>
                                                                     <td><?php echo $row->field_value; ?></td>
                                                                 <?php } ?>
@@ -98,6 +106,7 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th>Sl</th>
+                                                         <th class="date">Date</th>
                                                         <th>Name</th>
                                                         <th>Contact</th>
                                                         <th>Email</th>

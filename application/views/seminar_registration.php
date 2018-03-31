@@ -42,6 +42,7 @@
                                                     <thead style="background-color:#115E6E;color:#ffff;">
                                                         <tr>
                                                             <th>Sl</th>
+                                                             <th class="date">Date</th>
                                                             <th>First Name</th>
                                                             <th>Organization</th>
                                                             <th>Designation</th>
@@ -57,6 +58,7 @@
                                                             $cnt++;
                                                             $tme = $row1->submit_time;
                                                             $data['seminar_registration_ne'] = $this->seminar_registration_model->get_all(1, $tme);
+                                                            $date = date('r', $tme);
                                                             foreach ($data['seminar_registration_ne'] as $row) {
                                                                 ?>
                                                                 <?php if ($row->field_order == 0) { ?>
@@ -64,6 +66,13 @@
                                                                     <?php } ?>
                                                                     <?php if ($row->field_order == 0) { ?>
                                                                         <td><?php echo $cnt; ?></td>  
+                                                                    <?php } ?>
+                                                                        <?php if ($row->field_order == 0) { ?>
+                                                                        <td>
+                                                                            <?php $ne = new DateTime($date);
+                                                                            echo $ne->format('d-m-Y');
+                                                                            ?>
+                                                                        </td>
                                                                     <?php } ?>
                                                                     <?php if ($row->field_name == 'fullname') { ?>
                                                                         <td><?php echo $row->field_value; ?></td>
@@ -96,6 +105,7 @@
                                                     <tfoot>
                                                         <tr>
                                                             <th>Sl</th>
+                                                             <th class="date">Date</th>
                                                             <th>First Name</th>
                                                             <th>Organization</th>
                                                             <th>Designation</th>
