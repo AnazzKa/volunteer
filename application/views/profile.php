@@ -278,18 +278,14 @@
         function comments(volun) {
             $('#comm').empty();
             var reminder=$('#reminder').val();
-            var pro=<?php  $str = $_REQUEST['id'];
-        $str2 = substr($str, 10);
-        $id = substr($str2, 0, -10); 
-echo $id;
-        ?>;
+            var pro='<?php  echo $_REQUEST['id'];   ?>';
             $.ajax({
         type: "POST",
         url: "<?php $base_url ?>Profile/reminder",
         async: false,
         data: {volun:volun,reminder:reminder,pro:pro},
         success: function (response) {
-               // alert(response);
+                //alert(response);
          $('#comm').append(response);
 // console.log(response);
 $('#reminder').val('');

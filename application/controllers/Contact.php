@@ -1,10 +1,7 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Contact extends CI_Controller {
-
     function __construct() {
         parent::__construct();
         $this->load->helper('form');
@@ -14,13 +11,11 @@ class Contact extends CI_Controller {
         $this->load->model('privilege_model');
         $this->check_isvalidated();
     }
-
     private function check_isvalidated() {
         if (!$this->session->userdata('validated')) {
             header('Location:Login');
         }
     }
-
     public function index() {
         $data['msg'] = '';
         $data['title'] = 'Contact';
@@ -32,10 +27,6 @@ class Contact extends CI_Controller {
         $data['f_date'] = '';
         $data['t_date'] = '';
         $data['contacts'] = $this->contact_model->get_all(0, 0);
-//        echo "<pre>";
-//        print_r($data);
-//        exit;
-//        $this->load->view('contact_list', $data);
         $this->load->view('contact_list_new', $data);
     }
 

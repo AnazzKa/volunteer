@@ -20,7 +20,10 @@ class Profile extends CI_Controller {
         $data['msg'] = '';
         $data['title'] = 'Profile';
         $str = $_REQUEST['id'];
+        if(strlen($str)==32)
         $id = my_simple_crypt($str, 'd');       
+    else
+        $id=0;
         if (isset($_POST['status'])) {
             $volunteer_id = $_POST['volunteer_id'];
             $status = $_POST['status'];
@@ -68,16 +71,18 @@ class Profile extends CI_Controller {
     public function reminder() {
         if (isset($_POST['volun']) && isset($_POST['reminder'])) {
             $volunteer_id = $_POST['volun'];
-            $reminder = $_POST['reminder'];
-            $pro = $_POST['pro'];
+            $reminder = $_POST['reminder'];                    
+            $str= $_POST['pro'];
+            $pro =my_simple_crypt($str,'d');            
             $query = array(
                 'volunteer_id' => $volunteer_id,
                 'user_id' => $this->session->userdata('userid'),
                 'decription' => $reminder,
                 'date' => date('Y-m-d')
             );
+
             $result = $this->users_model->insert_comments($query);
-            $data['comments'] = $this->users_model->get_comments($pro);
+            $data['comments'] = $this->users_model->get_comments($pro);            
             $arr = "";
             foreach ($data['comments'] as $row) {
                 $user_id = $row->user_id;
