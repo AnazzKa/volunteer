@@ -146,7 +146,7 @@
         </div>
         <?php $this->load->view('script'); ?>
         <script>
-            $(document).ready(function () {
+            $(document).ready(function () {               
                 de();
             });
             var reg = [<?php echo $reg_bar ?>];
