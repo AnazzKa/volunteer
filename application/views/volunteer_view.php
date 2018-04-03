@@ -101,7 +101,7 @@
                                                         <th>Gender</th>
                                                         <th>Nationality</th>
                                                         <th>Phone</th>
-                                                        <th>Email</th>
+                                                        <th>Status</th>
                                                         <th>Super Power</th> 
                                                         <th>#</th>
                                                     </tr>
@@ -125,9 +125,31 @@
                                                             <td><?php echo $row->gender; ?></td>
                                                             <td><?php echo $row->nationality; ?></td>
                                                             <td><?php echo $row->phone; ?></td>
-                                                            <td><?php echo $row->email; ?></td>                    
+                                                            <td>
+                                                                <?php
+                                                                if($row->seleted_or_not==0){
+                                                                    $sts="Registered";     
+                                                                $st_lbl="label label-success";
+                                                                 }
+                                                                if($row->seleted_or_not==1){
+                                                                     $sts="Approved";
+                                                                     $st_lbl="label label-warning";
+                                                                  }
+                                                                 if($row->seleted_or_not==2){
+                                                                     $sts="Active";
+                                                                     $st_lbl="label label-default";
+                                                                  }
+                                                                 if($row->seleted_or_not==3){
+                                                                     $sts="In Active";
+                                                                     $st_lbl="label label-primary";
+                                                                  }
+                                                                ?>
+                                                                <span class="<?php echo $st_lbl ?>"><?php echo $sts; ?></span>
+                                                            </td>                    
                                                             <td><?php echo $row->superpower; ?></td>
-                                                            <td><a href="<?php $base_url ?>profile?id=<?php echo my_simple_crypt($row->id,'e'); ?>"><i class="fa fa-address-book fa-2x"></i></a>  </td>
+                                                            <td>
+                                                                <a href="<?php $base_url ?>profile?id=<?php echo my_simple_crypt($row->id,'e'); ?>"><i class="fa fa-address-book fa-2x"></i></a>  
+                                                            </td>
                                                         </tr>   
                                                     <?php } ?>
 
@@ -142,7 +164,7 @@
                                                         <th>Gender</th>
                                                         <th>Nationality</th>
                                                         <th>Phone</th>
-                                                        <th>Email</th>
+                                                        <th>Status</th>
                                                         <th>Super Power</th>  
                                                         <th>#</th>
                                                     </tr>

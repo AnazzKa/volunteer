@@ -54,31 +54,15 @@
 
                                         <form role="form" method="post" action="" enctype="multipart/form-data">
                                             <div class="col-sm-6 b-r">                                                                
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group">
                                                     <label>First Name</label> 
                                                     <input required type="text" name="F_Name" placeholder="First Name" class="form-control">
+                                                
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Lsat Name</label> 
-                                                    <input type="text" name="L_Name" placeholder="Last Name" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Birthday</label> 
-                                                    <input type="date" name="Birthday"  class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Gender</label> <br>
-                                                    Male <input name="Gender" type="radio" value="Male">
-                                                    FeMale <input name="Gender" type="radio" value="Female">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Phone</label> 
-                                                    <input type="text" name="Phone" placeholder="Enter Phone" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Email</label> 
-                                                    <input required type="email" name="email" placeholder="Enter Email" class="form-control">
-                                                </div>
+                                                
+                                                
+                                                
+                                                
                                                 <div>
                                                     <button class="btn btn-sm btn-primary pull-right m-t-n-xs" name="save" type="submit"><strong>Save</strong></button>            
                                                 </div>
@@ -86,33 +70,17 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
+                                                    <label>Email</label> 
+                                                    <input required type="email" name="email" placeholder="Enter Email" class="form-control">
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Password</label> 
                                                     <input required type="password" name="password"  class="form-control">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Nationality</label> 
-
-                                                    <select name="Nationality"  class="form-control">
-                                                        <?php
-                                                        foreach ($nationality as $row) {
-                                                            echo '<option value="' . $row->nationality . '">' . $row->nationality . '</option>';
-                                                        }
-                                                        ?>
-                                                       
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Super power</label> 
-                                                    <input type="text" name="superpower" placeholder="Super power" class="form-control">
-                                                </div>                                                
-                                                <div class="form-group">
-                                                    <label>Emirates_id</label> 
-                                                    <input required type="file" name="Emirates_id[]" multiple  class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>passport_copy</label> 
-                                                    <input required type="file" name="passport_copy[]" multiple placeholder="passport_copy" class="form-control">
-                                                </div>
+                                                
+                                                    
+                                                
+                                               
                                             </div>
                                         </form>
                                     </div>

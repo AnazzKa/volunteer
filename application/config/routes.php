@@ -56,7 +56,9 @@ $route['inactive_volunteers'] = 'Users/inactive_volunteers';
 $route['menus'] = 'Users/menus';
 $route['notifications'] = 'Users/notifications';
 $route['import'] = 'Import';
+$route['import_table'] = 'Import/import_table';
 $route['seminar_registration'] = 'seminar_registration';
+$route['epilepsy_masterclass'] = 'epilepsy_masterclass';
 
 $route['404_override'] = '';
 

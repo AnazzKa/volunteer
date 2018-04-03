@@ -20,60 +20,14 @@ class Users extends CI_Controller {
         $data['msg'] = '';
         $data['title'] = 'Users';
         if (isset($_POST['save'])) {
-
-            $config['allowed_types'] = 'gif|jpg|png';
-            $this->load->library('upload', $config);
-            $dataInfo = array();
-            $dataInfo1 = array();
-            $files = $_FILES;
-            //Emirates_id
-            $cpt = count($_FILES['Emirates_id']['name']);
-            for ($i = 0; $i < $cpt; $i++) {
-                $_FILES['Emirates_id']['name'] = $files['Emirates_id']['name'][$i];
-                $_FILES['Emirates_id']['type'] = $files['Emirates_id']['type'][$i];
-                $_FILES['Emirates_id']['tmp_name'] = $files['Emirates_id']['tmp_name'][$i];
-                $_FILES['Emirates_id']['error'] = $files['Emirates_id']['error'][$i];
-                $_FILES['Emirates_id']['size'] = $files['Emirates_id']['size'][$i];
-
-                $this->upload->initialize($this->set_upload_options());
-                if (!$this->upload->do_upload('Emirates_id')) :
-                    $error = array('error' => $this->upload->display_errors());
-                else :
-                    $dataInfo[] = $this->upload->data();
-                endif;
-            }
-            //passport_copy
-            $cpt = count($_FILES['passport_copy']['name']);
-            for ($i = 0; $i < $cpt; $i++) {
-                $_FILES['passport_copy']['name'] = $files['passport_copy']['name'][$i];
-                $_FILES['passport_copy']['type'] = $files['passport_copy']['type'][$i];
-                $_FILES['passport_copy']['tmp_name'] = $files['passport_copy']['tmp_name'][$i];
-                $_FILES['passport_copy']['error'] = $files['passport_copy']['error'][$i];
-                $_FILES['passport_copy']['size'] = $files['passport_copy']['size'][$i];
-
-                $this->upload->initialize($this->set_upload_options());
-                if (!$this->upload->do_upload('passport_copy')) :
-                    $error = array('error' => $this->upload->display_errors());
-                else :
-                    $dataInfo1[] = $this->upload->data();
-                endif;
-            }
+           
             $password = $this->input->post('password');
-            $encr_password = md5($password);
-            if (!empty($dataInfo[0]['file_name']) && !empty($dataInfo1[0]['file_name'])) {
+            $encr_password = md5($password);            
                 $query = array(
                     'time' => date('Y-m-d H:i:s'),
-                    'firstname' => $this->input->post('F_Name'),
-                    'lastname' => $this->input->post('L_Name'),
-                    'birthday' => $this->input->post('Birthday'),
-                    'gender' => $this->input->post('Gender'),
-                    'nationality' => $this->input->post('Nationality'),
-                    'phone' => $this->input->post('Phone'),
-                    'email' => $this->input->post('email'),
-                    'superpower' => $this->input->post('superpower'),
-                    'password' => $encr_password,
-                    'emirates_id' => $dataInfo[0]['file_name'],
-                    'passport_copy' => $dataInfo1[0]['file_name'],
+                    'firstname' => $this->input->post('F_Name'),                    
+                    'email' => $this->input->post('email'),                    
+                    'password' => $encr_password,                    
                     'designation_id' => 0,
                     'activated' => 1,
                     'creatd_user_id' => $this->session->userdata('userid')
@@ -84,10 +38,8 @@ class Users extends CI_Controller {
                 } else {
                     $data['msg'] = 'Insertion Error';
                 }
-            } else {
-                $data['msg'] = 'Only Image Format';
-            }
-        }
+            } 
+        
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('user_add', $data);
     }

@@ -41,7 +41,7 @@
                 </a>
             </li>
             <li>                
-                <a href="import/import_table"><span class="btn btn-primary"> <i class="fa fa-undo"></i></span></a>
+                <a href="import_table"><span class="btn btn-primary"> <i class="fa fa-undo"></i></span></a>
             </li>               
         </ul>
 

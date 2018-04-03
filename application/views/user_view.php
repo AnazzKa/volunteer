@@ -39,14 +39,11 @@
                                         <table class="table table-striped">
                                             <thead style="background-color:#115E6E;color:#ffff;">
                                                 <tr>
-                                                    <th>Sl</th>
-                                            <!--<th>Date</th>-->
+                                                    <th>Sl</th>                                     
                                                     <th>Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Nationality</th>
-                                                    <th>Phone</th>
+                                                    
                                                     <th>Email</th>
-                                                    <th>Super Power</th> 
+                                                    
                                                     <th>#</th>
                                                 </tr>
                                             </thead>
@@ -60,11 +57,9 @@
                                                     <tr id="<?php echo $row->user_id; ?>" <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
                                                         <td><?php echo $cnt; ?></td>   
                                                         <td><?php echo $row->firstname; ?></td>                    
-                                                        <td><?php echo $row->gender; ?></td>
-                                                        <td><?php echo $row->nationality; ?></td>
-                                                        <td><?php echo $row->phone; ?></td>
+                                                        
                                                         <td><?php echo $row->email; ?></td>            
-                                                        <td><?php echo $row->superpower; ?></td>
+                                                        
                                                         <td>
                                                             <a href="<?php $base_url ?>previlage?id=<?php echo my_simple_crypt($row->user_id,'e'); ?>"><i class="fa fa-lock fa-2x"></i></a>   
                                                             <a href="<?php $base_url ?>user_details?id=<?php echo my_simple_crypt($row->user_id,'e'); ?>"><i class="fa fa-book fa-2x"></i></a>                   
@@ -79,14 +74,11 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Sl</th>
-                                            <!--<th>Date</th>-->
+                                                    <th>Sl</th>                                     
                                                     <th>Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Nationality</th>
-                                                    <th>Phone</th>
+                                                    
                                                     <th>Email</th>
-                                                    <th>Super Power</th>  
+                                                    
                                                     <th>#</th>
                                                 </tr>
                                             </tfoot>

@@ -19,7 +19,8 @@ class Profile extends CI_Controller {
     public function index() {
         $data['msg'] = '';
         $data['title'] = 'Profile';
-        $str = $_REQUEST['id'];
+        $str =$_REQUEST['id']; 
+      
         if(strlen($str)==32)
         $id = my_simple_crypt($str, 'd');       
     else

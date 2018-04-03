@@ -91,7 +91,7 @@
                         <div class="widget navy-bg p-lg text-center">
                             <div class="m-b-md">
                                 <i class="fa fa-bell"></i>
-                                <h1 class="m-xs">1</h1>
+                                <h1 class="m-xs">0</h1>
                                 <h3 class="font-bold no-margins">
                                     Pending
                                 </h3>
@@ -209,7 +209,7 @@
                             data: act
                         },
                         {
-                            label: "Inactive",
+                            label: "Pending",
                             backgroundColor: 'rgba(26, 179, 148,0.5)',
                             borderColor: "rgba(26, 179, 148,0.7)",
                             pointBackgroundColor: "rgba(26, 179, 148,1)",
