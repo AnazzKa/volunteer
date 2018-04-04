@@ -26,12 +26,14 @@ class Login extends CI_Controller {
         }
     }
     public function do_logout() {
-        $this->session->unset_userdata('userid');
+        $this->session->unset_userdata('userid');        
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('volunteer_id');
         $this->session->unset_userdata('user_cat');
         $this->session->unset_userdata('validated');
         $this->session->sess_destroy();
+
+         echo"fg". $this->session->userdata('validated');exit;
         redirect('Login', 'refresh');
     }
 }

@@ -24,7 +24,7 @@
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="row">
                         <?php if ($msg != "") { ?>
-                            <div class="col-lg-12">
+                            <div class="col-md-12">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title navy-bg">
                                         <h5><?php echo $msg; ?></h5>
@@ -38,7 +38,7 @@
                             </div>
                         <?php } ?>
 
-                        <div class="col-lg-12">
+                        <div class="col-md-12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
                                     <h5>Users <small>Previlage</small></h5>
@@ -60,9 +60,9 @@
                                                     $reslut2['res'] = $this->privilege_model->get_result($qry2);
                                                     $cnt = count($reslut2['res']);
                                                     ?>
-                                                    <div class="form-group col-lg-12">
-                                                        <label class="col-sm-2 control-label col-lg-2" for="inputSuccess"><?php echo $module_head ?></label>
-                                                        <div class="col-lg-10">
+                                                    <div class="form-group col-md-12">
+                                                        <label class="col-md-2 control-label col-md-2" for="inputSuccess"><?php echo $module_head ?></label>
+                                                        <div class="col-md-10">
                                                             <label class="checkbox-inline">
                                                                 <input name="chk[]" type="checkbox" <?php if ($cnt > 0) { ?> checked <?php } ?>  id="<?php echo $module_id ?>" value="<?php echo $module_id ?>"><?php echo $module_head ?>
                                                             </label>
@@ -85,7 +85,7 @@
                                                     </div>
                                                 <?php } ?>
                                             </div>
-                                            <div class="col-lg-12">
+                                            <div class="col-md-12">
                                                 <section class="panel">
                                                     <center> 
                                                         <button class="btn btn-primary" name="submit" type="submit">Update</button>    

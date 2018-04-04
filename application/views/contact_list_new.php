@@ -48,8 +48,8 @@
                                                         <th>Phone</th>
                                                         <th>Email</th>
                                                         <th>Message</th>
-                                                        <th>your-recipient</th>                                                  
-                                                        <!--<th>#</th>-->
+                                                        <th>your-recipient</th>
+                                                        <th>#</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -57,7 +57,7 @@
                                                     $cnt = 0;
                                                     foreach ($contacts as $row1) {
                                                         $cnt++;
-                                                        $tme = $row1->submit_time;
+                                                      $row_id=  $tme = $row1->submit_time;
                                                         $data['contacts_ne'] = $this->contact_model->get_all(1, $tme);
                                                          $date = date('r', $tme);
                                                         foreach ($data['contacts_ne'] as $row) {
@@ -93,7 +93,10 @@
                                                                 <?php if ($row->field_name == 'your-recipient') { ?>
                                                                     <td> <?php echo $row->field_value; ?></td>
                                                                 <?php } ?>
-                                                                <?php if ($row->field_order == 5) { ?>    
+                                                                <?php if ($row->field_order == 5) { ?> 
+                                                                <td>
+                                                                <a href="<?php $base_url ?>contact_single_view?id=<?php echo my_simple_crypt($row_id,'e'); ?>"><i class="fa fa-address-book fa-2x"></i></a>  
+                                                            </td>  
                                                                 </tr> 
                                                             <?php }
                                                         }
@@ -111,7 +114,7 @@
                                                         <th>Contact</th>
                                                         <th>Email</th>
                                                         <th>Message</th>
-                                                        <th>Type</th>                                                  
+                                                        <th>Type</th>
                                                         <th>#</th>
                                                     </tr>
                                                 </tfoot>

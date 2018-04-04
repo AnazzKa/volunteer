@@ -35,7 +35,7 @@ class Dashboard extends CI_Controller {
         $data['app_bar'] = $this->bar_approved(2018);
         $data['app_bar_1'] = $this->bar_approved(2017);
         $data['act_bar'] = $this->bar_active(2018);
-        $data['act_bar_1'] = $this->bar_active(2018);
+        $data['act_bar_1'] = $this->bar_active(2017);
         $data['pen_bar'] = $this->bar_pending(2018);
         $data['pen_bar_1'] = $this->bar_pending(2017);
         $this->load->view('dashboard', $data);
@@ -95,8 +95,8 @@ class Dashboard extends CI_Controller {
         $r = rtrim($r, ", ");
         return $r;
     }
-    private function check_isvalidated() {
-        $this->session->userdata('validated');
+    private function check_isvalidated() {       
+       $this->session->userdata('validated');
         if ($this->session->userdata('validated') == '') {
             header('Location:Login');
         }
