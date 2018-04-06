@@ -59,9 +59,10 @@ $route['menus'] = 'Users/menus';
 $route['notifications'] = 'Users/notifications';
 $route['import'] = 'Import';
 $route['import_table'] = 'Import/import_table';
-$route['seminar_registration'] = 'seminar_registration';
-$route['epilepsy_masterclass'] = 'epilepsy_masterclass';
-
+$route['seminar_registration'] = 'Seminar_registration';
+$route['epilepsy_masterclass'] = 'Epilepsy_masterclass';
+$route['acyanotic_heart_disease'] = 'Acyanotic_heart_disease';
+$route['edm'] = 'Edm';
 $route['404_override'] = '';
 
 

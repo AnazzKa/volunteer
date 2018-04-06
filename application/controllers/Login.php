@@ -32,8 +32,7 @@ class Login extends CI_Controller {
         $this->session->unset_userdata('user_cat');
         $this->session->unset_userdata('validated');
         $this->session->sess_destroy();
-
-         echo"fg". $this->session->userdata('validated');exit;
+        $this->session->userdata('validated');
         redirect('Login', 'refresh');
     }
 }
