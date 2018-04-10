@@ -30,7 +30,14 @@
                             <div class="ibox float-e-margins">
                                 <form role="form" id="form_search" method="post">
                                     <div class="ibox-title">
-                                        <h5><?php echo $title; ?> Details</h5>                        
+                                        <h5><?php echo $title; ?> Details</h5>  
+                                        <div class="pull-right">
+                                    <form action="" method="post">
+                                    <div class="btn-group">
+                                        <button type="submit" name="export" class="btn btn-primary">Export</button>                                        
+                                    </div>
+                                </form>
+                                </div>                       
                                     </div>
 
 

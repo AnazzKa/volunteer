@@ -44,6 +44,7 @@
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
                                     <h5>Contact Single View</h5>
+                                    
                                 </div>
                             </div>
                         </div>

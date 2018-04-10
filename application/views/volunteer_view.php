@@ -86,6 +86,8 @@
                                             <button class="btn btn-primary" name="reset" type="reset"><i class="fa fa-undo"></i></button>
                                             <button class="btn btn-primary" name="search" type="submit"><i class="fa fa-search"></i></button>
                                             <a href="<?php $base_url; ?>volunteer_print?id=<?php echo my_simple_crypt($status,'e'); ?>" target="_blank"> <button id="btnPrint" class="btn btn-primary" name="print" type="button"><i class="fa fa-print"></i></button></a>
+                                             <a href="<?php $base_url; ?>volunteer_exsl?id=<?php echo my_simple_crypt($status,'e'); ?>" class="btn btn-primary">
+                                                <i class="fa fa-file-excel-o"></i></a>
                                         </div>
                                     </div>
 
@@ -101,8 +103,10 @@
                                                         <th>Gender</th>
                                                         <th>Nationality</th>
                                                         <th>Phone</th>
+                                                        <th>Email</th>
                                                         <th>Status</th>
                                                         <th>Super Power</th> 
+                                                        
                                                         <th>#</th>
                                                     </tr>
                                                 </thead>
@@ -125,6 +129,7 @@
                                                             <td><?php echo $row->gender; ?></td>
                                                             <td><?php echo $row->nationality; ?></td>
                                                             <td><?php echo $row->phone; ?></td>
+                                                            <td><?php echo $row->email; ?></td>
                                                             <td>
                                                                 <?php
                                                                 if($row->seleted_or_not==0){
@@ -164,6 +169,7 @@
                                                         <th>Gender</th>
                                                         <th>Nationality</th>
                                                         <th>Phone</th>
+                                                        <th>Email</th>
                                                         <th>Status</th>
                                                         <th>Super Power</th>  
                                                         <th>#</th>

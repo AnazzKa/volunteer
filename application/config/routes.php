@@ -48,6 +48,7 @@ $route['volunteer_view'] = 'Users/volunteer_view';
 $route['previlage'] = 'Users/previlage';
 $route['selected_volunteers'] = 'Users/selected_volunteers';
 $route['volunteer_print'] = 'Users/volunteer_print';
+$route['volunteer_exsl'] = 'Users/volunteer_exsl';
 $route['profile_print'] = 'Profile/profile_print';
 $route['contact'] = 'Contact';
 $route['contact_single_view'] = 'Contact/contact_single_view';
@@ -63,6 +64,10 @@ $route['seminar_registration'] = 'Seminar_registration';
 $route['epilepsy_masterclass'] = 'Epilepsy_masterclass';
 $route['acyanotic_heart_disease'] = 'Acyanotic_heart_disease';
 $route['edm'] = 'Edm';
+$route['edm_add_contact'] = 'Edm/edm_add_contact';
+$route['edm_mail_send'] = 'Edm/edm_mail_send';
+$route['edm_add_category'] = 'Edm/edm_add_category';
+$route['campaign'] = 'Campaign';
 $route['404_override'] = '';
 
 

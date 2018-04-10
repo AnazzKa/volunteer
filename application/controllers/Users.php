@@ -340,4 +340,65 @@ class Users extends CI_Controller {
         $id = my_simple_crypt($str, 'd');
         $this->users_model->delete_users($id);
     }
+    public function volunteer_exsl()
+    {
+$str = $_REQUEST['id'];
+            $id = my_simple_crypt($str, 'd');
+            $query = "SELECT * FROM `al_volunteer` WHERE `id`!='' and seleted_or_not='" . $id . "'";
+        // create file name
+        $fileName = 'data-'.time().'.xlsx';  
+        // load excel library
+        $this->load->library('excel');
+        $empInfo = $this->users_model->get_volunteer($query); 
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        // set Header
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Slno');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Date');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Date Of Birth');
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Gender');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Nationality');
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Phone');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Email');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Super Power');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'About jalila');       
+        // set Row
+        $rowCount = 2;$cnt = 0;
+        foreach ($empInfo as $element) {
+            $cnt++;
+            $dat = $element->time;
+            $arr = explode("-", $dat);
+            $aarr = explode(" ", $arr[2]);
+            $date= $aarr[0] . "-" . $arr[1] . "-" . $arr[0];
+            $name=$element->firstname." ".$element->middlename." ".$element->lastname;
+ $dat1 = $element->birthday;
+$arr1=explode("-", $dat1);;
+$dob=$arr1[2] . "-" . $arr1[1] . "-" . $arr1[0];
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $cnt);            
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $date);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $dob);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $name);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element->gender);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element->nationality);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element->phone);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element->email);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element->superpower);
+            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element->about_jalila);
+    
+            $rowCount++;
+        }
+
+        //Godaddy Server
+        $object_writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="Volunteer.xls"');
+        $object_writer->save('php://output');
+
+        // $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+        // $objWriter->save('uploads'.$fileName);
+        //download file
+        // header("Content-Type: application/vnd.ms-excel");
+        // redirect('uploads'.$fileName); 
+    }
 }

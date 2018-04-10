@@ -21,6 +21,8 @@ class Epilepsy_masterclass_model extends CI_Model {
         }
 
         $query = $this->another->get();
+        
         return $query->result();
     }
+    
 }
