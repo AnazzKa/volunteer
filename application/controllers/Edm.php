@@ -76,10 +76,10 @@ class Edm extends CI_Controller {
         else
             $data['edmlist']="";
 
-if($type!='Volunteer' && $type!='Contact'&& $type!='Appointment'&& $type!='SeminarRegistrationEnglish'&& $type!='EpilepsyMasterclass'&& $type!='AcyanoticHeartDisease'  && $category=="edmlist"){
-    $data['s_edm_category']=$_POST['type'];
-    $data['edmlist']=$this->edm_model->get_all($_POST['type']);
-}
+        if($type!='Volunteer' && $type!='Contact'&& $type!='Appointment'&& $type!='SeminarRegistrationEnglish'&& $type!='EpilepsyMasterclass'&& $type!='AcyanoticHeartDisease'  && $category=="edmlist"){
+            $data['s_edm_category']=$_POST['type'];
+            $data['edmlist']=$this->edm_model->get_all($_POST['type']);
+        }
         $data['category'] = $this->edm_model->get_category();           
         $data['nationality'] = $this->users_model->get_nationality();         
         $this->load->view('edm', $data);
@@ -91,17 +91,17 @@ if($type!='Volunteer' && $type!='Contact'&& $type!='Appointment'&& $type!='Semin
         $data['title'] = 'EDM Contact';
         if(isset($_POST['save'])){
 
-$cpt = count($_POST['F_Name']);
+            $cpt = count($_POST['F_Name']);
             for ($i = 0; $i < $cpt; $i++) {
                 $arr[] =array(
-                'entry_time' => date('Y-m-d H:i:s'),
-                'full_name' => $this->input->post('F_Name')[$i],                    
-                'gender' => $this->input->post('edm_gender')[$i],                    
-                'Nationality' => $this->input->post('Nationality')[$i],                    
-                'phone' => $this->input->post('phone')[$i],
-                'email' => $this->input->post('email')[$i],
-                'category_id' => $this->input->post('category_name')
-            );
+                    'entry_time' => date('Y-m-d H:i:s'),
+                    'full_name' => $this->input->post('F_Name')[$i],                    
+                    'gender' => $this->input->post('edm_gender')[$i],                    
+                    'Nationality' => $this->input->post('Nationality')[$i],                    
+                    'phone' => $this->input->post('phone')[$i],
+                    'email' => $this->input->post('email')[$i],
+                    'category_id' => $this->input->post('category_name')
+                );
             }
             
             $result = $this->edm_model->add($arr);
@@ -121,16 +121,16 @@ $cpt = count($_POST['F_Name']);
          //echo count($arr);
     $emails=array();
     foreach ($arr as $s) {
-       $emails[]= array( "email" => "$s");
-   }
+     $emails[]= array( "email" => "$s");
+ }
         // echo "<pre>";print_r($emails);
          // echo "<pre>";print_r($arr);
-   $subject = $_POST['subject'];
-   $messsage = $_POST['messageinput'];
-   $this->load->config('mandrill');
-   $this->load->library('mandrill');
-   $mandrill_ready = NULL;
-   try {
+ $subject = $_POST['subject'];
+ $messsage = $_POST['messageinput'];
+ $this->load->config('mandrill');
+ $this->load->library('mandrill');
+ $mandrill_ready = NULL;
+ try {
     $this->mandrill->init($this->config->item('mandrill_api_key'));
     $mandrill_ready = TRUE;
 } catch (Mandrill_Exception $e) {
@@ -143,7 +143,7 @@ if ($mandrill_ready) {
         array('name' =>'sub' ,'content'=>$subject),
         array('name' =>'msg' ,'content'=>$messsage)
     );
-   $email = array(
+    $email = array(
                     'html' => '<p>Example HTML content</p>', //Consider using a view file
                     'text' => 'This is my plaintext message',
                     'subject' => $subject,
@@ -152,7 +152,7 @@ if ($mandrill_ready) {
                     'to' => $emails //Check documentation for more details on this one
                         //'to' => array(array('email' => 'joe@example.com' ),array('email' => 'joe2@example.com' )) //for multiple emails
                 );
-   $result = $this->mandrill->messages_send_template($temlate_name,$template_content,$email);
+    //$result = $this->mandrill->messages_send_template($temlate_name,$template_content,$email);
 }
 //echo "<pre>";print_r($result);
 $msg="Mail Send Sucessfully";
@@ -165,18 +165,18 @@ public function edm_add_category()
     $cat=$_POST['cat'];
     $des=$_POST['des'];
     $query = array(
-                'category_name' => $cat,
-                'description' => $des
-            );
-            $result = $this->edm_model->add_category($query);
+        'category_name' => $cat,
+        'description' => $des
+    );
+    $result = $this->edm_model->add_category($query);
 
 
-     $variable = $this->edm_model->get_category();   
-     $res="<option value=''>Category</option>";    
-     foreach ($variable as $value) {
-         $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
-     }
-     echo $res;
+    $variable = $this->edm_model->get_category();   
+    $res="<option value=''>Category</option>";    
+    foreach ($variable as $value) {
+       $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
+   }
+   echo $res;
 
 }
 }

@@ -32,10 +32,16 @@
                         <div class="ibox float-e-margins">
                             
                                 <div class="ibox-title">
-                                    <h5><?php echo $title; ?> Details</h5>                        
+                                    <h5><?php echo $title; ?> Details</h5> 
+                                    <div class="pull-right">
+                                    
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary"  id="envelope" href="#signup" data-toggle="modal" data-target=".bs-modal-md">Send</button>                                        
+                                    </div>
+                                
+                                </div>                       
                                 </div>
-
-                                <!-- Modal -->
+                                 <!-- Modal -->
                                 
 
 <div class="modal fade bs-modal-md" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -45,11 +51,25 @@
       <div class="modal-body">
         <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in" id="signin">
-            <form class="form-horizontal" method="post" action="edm_mail_send">
+            <form class="form-horizontal" method="post" action="campaign_mail_send">
+            <!-- <form class="form-horizontal" method="post"> -->
             <fieldset>
             <!-- Sign In Form -->
             <div class="control-group">
               <input type="hidden" name="emails" id="emails">              
+              <input type="hidden" name="last_id" value="<?php echo $last_id; ?>">              
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="userid">Select Templates</label>
+              <div class="controls">
+                <select name="Templates" class="form-control">
+                    <option value="">Default</option>
+                    <option value="vishunew">Vishu</option>
+                </select>
+              </div>
+            </div>
+            <div class="control-group">
+             <center> <label class="control-label fa-2x" for="userid">OR</label></center>
             </div>
             <!-- Text input-->
             <div class="control-group">
@@ -58,7 +78,6 @@
                 <input required="" id="userid" name="subject" type="text" class="form-control input-medium" placeholder="Subject">
               </div>
             </div>
-
             <!-- Password input-->
             <div class="control-group">
               <label class="control-label" for="passwordinput">Message</label>
@@ -70,7 +89,7 @@
             <div class="control-group">
               <label class="control-label" for="signin"></label>
               <div class="controls">
-                <button id="signin" type="submit" name="send" class="btn btn-success">Send</button>
+                <button id="signin" type="submit" href="#signup" data-toggle="modal" data-target=".bs-modal-md" class="btn btn-success">Send</button>
               </div>
             </div>
             </fieldset>
@@ -84,56 +103,6 @@
   </div>
 </div>
 <!-- model box end -->
-
-                                <div class="ibox-content col-md-12">
-<form role="form" id="form_search" method="post">
-                                    
-                                        
-                                        <div class="form-group col-md-2">      
-                                            <select onchange="this.form.submit()"  name="category" class="form-control">
-                                                <!-- <select id="category"  name="category" class="form-control"> -->
-                                                    <option <?php if ($s_category == '') { ?>selected<?php } ?> value="">All Type</option>
-                                                    <option <?php if ($s_category == 'General') { ?>selected<?php } ?> value="General">General</option>
-                                                    <option <?php if ($s_category == 'edmlist') { ?>selected<?php } ?> value="edmlist">EDM LIST</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-3">                                    
-                                        <select onchange="this.form.submit()"  name="type" class="form-control">
-                                            <!-- <select id="type"  name="type" class="form-control"> -->
-                                                <option <?php if ($s_type == '') { ?>selected<?php } ?> value="">All Category</option><option <?php if ($s_type == 'Volunteer') { ?>selected<?php } ?> value="Volunteer">Volunteer</option>
-                                                <option <?php if ($s_type == 'Contact') { ?>selected<?php } ?> value="Contact">Contact</option>
-                                                <option <?php if ($s_type == 'Appointment') { ?>selected<?php } ?> value="Appointment">Appointment</option>
-                                                <option <?php if ($s_type == 'SeminarRegistrationEnglish') { ?>selected<?php } ?> value="SeminarRegistrationEnglish">Seminar Registration English</option>
-                                                <option <?php if ($s_type == 'EpilepsyMasterclass') { ?>selected<?php } ?> value="EpilepsyMasterclass">Epilepsy Masterclass</option>
-                                                <option <?php if ($s_type == 'AcyanoticHeartDisease') { ?>selected<?php } ?> value="AcyanoticHeartDisease">Acyanotic Heart Disease</option>
-                                                <?php foreach ($category as $row) { ?>
-                                                            <option <?php if ($s_edm_category == $row->category_id) { ?>selected<?php } ?> value="<?php echo $row->category_id ?>"><?php echo $row->category_name ?></option>
-                                                            <?php }
-                                                            ?>
-                                            </select>
-                                        </div>
-                                            <div class="form-group col-md-2">                                    
-                                                <!--<select onchange="this.form.submit()"  name="gender" class="form-control">-->
-                                                    <select id="gender"  name="gender" class="form-control">
-                                                        <option <?php if ($s_gender == '') { ?>selected<?php } ?> value="">Gender</option>
-                                                        <option <?php if ($s_gender == 'male') { ?>selected<?php } ?> value="male">Male</option>
-                                                        <option <?php if ($s_gender == 'female') { ?>selected<?php } ?> value="female">Female</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-3">                                                    
-                                                        <select id="nationality" name="nationality" class="form-control">
-                                                            <option value="">Nationality</option>
-                                                            <?php foreach ($nationality as $row) { ?>
-                                                            <option <?php if ($s_nationality == $row->nationality) { ?>selected<?php } ?> value="<?php echo $row->nationality ?>"><?php echo $row->nationality ?></option>
-                                                            <?php }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                    </form>
-                                                    <div class="form-group col-md-1">                                    
-                                                        <!-- <button class="btn btn-primary" id="envelope" href="#signup" data-toggle="modal" data-target=".bs-modal-md"><i class="fa fa-envelope"></i></button> -->
-                                                    </div>
-                                                </div>
                                                 <div class="ibox-content">
 
                                                     <div style="position:absolute;
@@ -171,7 +140,7 @@
                                                             <thead style="background-color:#115E6E;color:#ffff;">
                                                                 <tr>
                                                                     <th>#</th>                                                       
-                                                                    <th><input type="checkbox"></th>                       
+                                                                    <th>#</th>                       
                                                                     <th>Name</th>
                                                                     <th>Gender</th>
                                                                     <th>Nationality</th>
@@ -189,7 +158,7 @@
                                                                 ?>
                                                                 <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
                                                                     <td><?php echo $cnt; ?></td>
-                                                                    <td><input type="checkbox" name="vol[]" value="<?php echo $row->email; ?>"></td>
+                                                                    <td><input type="checkbox" name="vol[]" checked value="<?php echo $row->email; ?>"></td>
                                                                     <td><?php echo $row->firstname; ?></td>                    
                                                                     <td><?php echo $row->gender; ?></td>
                                                                     <td><?php echo $row->nationality; ?></td>
@@ -208,7 +177,7 @@
                                                                 ?>
                                                                 <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
                                                                     <td><?php echo $cnt; ?></td>
-                                                                    <td><input type="checkbox" name="vol[]" value="<?php echo $row->email; ?>"></td>
+                                                                    <td><input type="checkbox" name="vol[]" checked value="<?php echo $row->email; ?>"></td>
                                                                     <td><?php echo $row->full_name; ?></td>                    
                                                                     <td><?php echo $row->gender; ?></td>
                                                                     <td><?php echo $row->Nationality; ?></td>
@@ -234,7 +203,7 @@
                                                                     <?php } ?>
                                                                     <?php if ($row->field_order == 0) { ?>
                                                                     <td><?php echo $cnt; ?></td>  
-                                                                    <td><input type="checkbox" name="vol[]" value="<?php echo $data['contacts_ne'][3]->field_value; ?>"></td>  
+                                                                    <td><input type="checkbox" name="vol[]" checked value="<?php echo $data['contacts_ne'][3]->field_value; ?>"></td>  
                                                                     <?php } ?>
                                                                     
                                                                     <?php if ($row->field_name == 'contact_first_name') { ?>
@@ -273,7 +242,7 @@
                                                                 <?php } ?>
                                                                 <?php if ($row->field_order == 0) { ?>
                                                                 <td><?php echo $cnt; ?></td>  
-                                                                <td><input type="checkbox" name="vol[]" value="<?php echo $data['appointment_ne'][3]->field_value; ?>"></td>  
+                                                                <td><input type="checkbox" name="vol[]" checked value="<?php echo $data['appointment_ne'][3]->field_value; ?>"></td>  
                                                                 <?php } ?>
 
 
@@ -315,7 +284,7 @@
                                                         <?php } ?>
                                                         <?php if ($row->field_order == 0) { ?>
                                                         <td><?php echo $cnt; ?></td>  
-                                                        <td><input type="checkbox" name="vol[]" value="<?php echo $data['seminar_registration_ne'][4]->field_value; ?>"></td>
+                                                        <td><input type="checkbox" name="vol[]" checked value="<?php echo $data['seminar_registration_ne'][4]->field_value; ?>"></td>
                                                         <?php } ?>
 
                                                         <?php if ($row->field_name == 'fullname') { ?>
@@ -358,7 +327,7 @@
                                                 <?php } ?>
                                                 <?php if ($row->field_order == 0) { ?>
                                                 <td><?php echo $cnt; ?></td>  
-                                                <td><input type="checkbox" name="vol[]" value="<?php echo $data['epilepsy_masterclass_ne'][3]->field_value; ?>"></td> 
+                                                <td><input type="checkbox" name="vol[]" checked value="<?php echo $data['epilepsy_masterclass_ne'][3]->field_value; ?>"></td> 
                                                 <?php } ?>
 
                                                 <?php if ($row->field_name == 'fullname') { ?>
@@ -399,7 +368,7 @@
                                         <?php } ?>
                                         <?php if ($row->field_order == 0) { ?>
                                         <td><?php echo $cnt; ?></td>  
-                                        <td><input type="checkbox" name="vol[]" value="<?php echo $data['acyanotic_heart_disease_ne'][3]->field_value; ?>"></td>
+                                        <td><input type="checkbox" name="vol[]" checked value="<?php echo $data['acyanotic_heart_disease_ne'][3]->field_value; ?>"></td>
                                         <?php } ?>
 
                                         <?php if ($row->field_name == 'fullname') { ?>
@@ -460,7 +429,7 @@ setTimeout(function() {
               $('#dvContents').show();
               $('.loader').hide();  
 
-            }, 5000);
+            }, 1000);
 
 <?php if($this->session->flashdata('messsage')!=""){ ?>
          setTimeout(function() {
@@ -486,24 +455,7 @@ setTimeout(function() {
 
                     });
 
-        $("#super_power").on("change", function () {
-            var value = $(this).val().toLowerCase();
-            $(".dataTables-example tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-        $("#nationality").on("change", function () {
-            var value = $(this).val().toLowerCase();
-            $(".dataTables-example tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-        $("#gender").on("change", function () {
-            var value = $(this).val().toLowerCase();
-            $(".dataTables-example tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
+        
         $('#envelope').on('click',function(){
 
             var val = [];

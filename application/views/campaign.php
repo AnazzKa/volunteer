@@ -29,258 +29,140 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
-                            
-                                <div class="ibox-title">
-                                    <h5><?php echo $title; ?> Details</h5>                        
+
+                            <div class="ibox-title">
+                                <h5><?php echo $title; ?> Details</h5>                        
+                            </div>
+
+                            <div class="ibox-content col-md-12">
+                                <div class="form-group col-md-1">                                    
+                                    <a href="<?php $base_url ?>add_campaign"><button class="btn btn-primary">Add Campaign</button></a>
                                 </div>
-                                <!-- Modal -->
-                                
+                            </div>
+                            <?php if(!empty($campaign)){ ?>
+                            <div class="ibox-content">
+                                <div class="table-responsive" id="dvContents">
+                                    <table class="table dataTables-example" >
+                                        <thead style="background-color:#115E6E;color:#ffff;">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Date</th>
+                                                <th>campaign Name</th>
+                                                <th>Discription</th>
+                                                <th>#</th>                                                  
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-<div class="modal fade bs-modal-md edm_mail_send" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-        <br>
-      <div class="modal-body">
-        <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="signin">
-            <form class="form-horizontal" method="post" action="edm_mail_send">
-            <fieldset>
-            <!-- Sign In Form -->
-            <div class="control-group">
-              <input type="hidden" name="emails" id="emails">              
-            </div>
-            <div class="control-group">
-              <label class="control-label" for="userid">Choose template</label>
-                <select name="template" class="form-control">
-                    <option value="">Test</option>
-                </select>
-              </div>
-            
-            <div class="control-group">
-              <center><h2>OR</h2></center>
-                
-              </div>
-            
-            <!-- Text input-->
-            <div class="control-group">
-              <label class="control-label" for="userid">Subject</label>
-              <div class="controls">
-                <input  id="userid" name="subject" type="text" class="form-control input-medium" placeholder="Subject">
-              </div>
-            </div>
+                                            <?php
+                                            $cnt = 0;
 
-            <!-- Password input-->
-            <div class="control-group">
-              <label class="control-label" for="passwordinput">Message</label>
-              <div class="controls">
-                <textarea  id="messageinput" name="messageinput" class="form-control input-medium" placeholder="Message"></textarea>
-              </div>
-            </div>                
-            <!-- Button -->
-            <div class="control-group">
-              <label class="control-label" for="signin"></label>
-              <div class="controls">
-                <button id="signin" type="submit" name="send" class="btn btn-success">Send</button>
-              </div>
-            </div>
-            </fieldset>
-            </form>
-        </div>
-        
-    </div>
-      </div>            
-      
-    </div>
-  </div>
-</div>
+                                            foreach ($campaign as $row) {
+                                                $cnt++;
+                                                ?>
+                                                
+                                                    <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
+                                                        <td><?php echo $cnt; ?></td>                                             
+                                                        <td><?php echo $row->time; ?></td>                    
+                                                        <td><?php echo $row->campaign_name; ?></td>
+                                                        <td><?php echo $row->description; ?></td>
+                                                        <td><a href="<?php $base_url; ?>view_campaign_details?camp=<?php echo my_simple_crypt($row->campaignid,'e'); ?>"><button class="btn btn-primary"><i class="fa fa-arrow-right"></i></button></a></td>                                                   
+                                                    </tr>
+                                                 
+                                                <?php } ?>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Date</th>
+                                                    <th>campaign Name</th>
+                                                    <th>Discription</th>
+                                                    <th>#</th>                                                          
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
 
-<!-- model box end -->
-<!-- new model box start -->
-<div class="modal fade bs-modal-md campaign_add" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-        <br>
-      <div class="modal-body">
-        <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="signin">
-            <form class="form-horizontal" method="post" action="campaign_add">
-            <fieldset>
-            <!-- Sign In Form -->
-            <!-- Text input-->
-            <div class="control-group">
-              <!-- <label class="control-label" for="userid">Category</label> -->
-              <div class="controls">
-                <select name="campaign_cat" type="text" class="form-control input-medium" >
-                    <option value="">Category</option>
-                </select>
-              </div>
-            </div>
-            <div class="control-group">
-              <!-- <label class="control-label" for="userid">Type</label> -->
-              <div class="controls">
-                <select name="campaign_type" type="text" class="form-control input-medium" >
-                    <option value="">Type</option>
-                </select>
-              </div>
-            </div>
-            <div class="control-group">
-              <!-- <label class="control-label" for="userid">Campaign Name</label> -->
-              <div class="controls">
-                <input required=""  name="campaign_name" type="text" class="form-control input-medium" placeholder="Campaign Name">
-              </div>
-            </div>
+                                </div>
+                                <?php } else { ?>
+                                <div class="col-lg-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title gray-bg">
+                                            <h5>No Data Found</h5>
+                                            <div class="ibox-tools">
+                                                <a class="close-link">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
 
-            <!-- Password input-->
-            <div class="control-group">
-              <!-- <label class="control-label" for="passwordinput">Description</label> -->
-              <div class="controls">
-                <textarea required=""  name="description" class="form-control input-medium" placeholder="Description"></textarea>
-              </div>
-            </div>                
-            <!-- Button -->
-            <div class="control-group">
-              <label class="control-label" for="signin"></label>
-              <div class="controls">
-                <button id="signin" type="submit" name="Save" class="btn btn-success">Save</button>
-              </div>
-            </div>
-            </fieldset>
-            </form>
-        </div>
-        
-    </div>
-      </div>            
-      
-    </div>
-  </div>
-</div>
-<!-- new model box start -->
+                            </div>
+                        </div>
+                    </div>
 
-                                <div class="ibox-content col-md-12">
-
-                                                    <div class="form-group col-md-1">                                    
-                                                        <button class="btn btn-primary" id="envelope" href="#signup" data-toggle="modal" data-target=".edm_mail_send"><i class="fa fa-envelope"></i></button>
-                                                    </div>
-                                                    <div class="form-group col-md-1">                                    
-                                                        <button class="btn btn-primary" href="#signup" data-toggle="modal" data-target=".campaign_add">Add Campaign</button>
-                                                    </div>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    <div class="table-responsive" id="dvContents">
-                                                        <table class="table dataTables-example" >
-                                                            <thead style="background-color:#115E6E;color:#ffff;">
-                                                                <tr>
-                                                                    <th>#</th>                                                       
-                                                                                          
-                                                                    <th>Name</th>
-                                                                    <th>Gender</th>
-                                                                    <th>Nationality</th>
-                                                                    <th>Phone</th>
-                                                                    <th>Email</th>       <th><input type="checkbox"></th>                                                  
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                                <?php
-                                                                $cnt = 0;
-                                                                if($campaign!=""){
-                                                                foreach ($campaign as $row) {
-                                                                $cnt++;
-                                                                ?>
-                                                                <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
-                                                                    <td><?php echo $cnt; ?></td>
-                                                                    
-                                                                    <td><?php echo $row->firstname; ?></td>                    
-                                                                    <td><?php echo $row->gender; ?></td>
-                                                                    <td><?php echo $row->nationality; ?></td>
-                                                                    <td><?php echo $row->phone; ?></td>
-                                                                    <td><?php echo $row->email; ?></td>
-<td><input type="checkbox" name="vol[]" value="<?php echo $row->email; ?>"></td>
-                                                                </tr>   
-                                                                <?php } } ?>
-                                                                <!-- volunteer end -->
-                                                                
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>#</th>                                                       
-                                                                                     
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Nationality</th>
-                                <th>Phone</th>
-                                <th>Email</th> <th>#</th>                                                         
-                            </tr>
-                        </tfoot>
-                    </table>
                 </div>
-
+                <?php $this->load->view('footer'); ?>
             </div>
-        
-    </div>
-</div>
-</div>
 
-</div>
-<?php $this->load->view('footer'); ?>
-</div>
+            <?php // $this->load->view('chat');   ?>
+        </div>
+        <?php $this->load->view('script'); ?>
+        <script>
+            $(document).ready(function () {
 
-<?php // $this->load->view('chat');   ?>
-</div>
-<?php $this->load->view('script'); ?>
-<script>
-    $(document).ready(function () {
+                <?php if($this->session->flashdata('messsage')!=""){ ?>
+                   setTimeout(function() {
+                    toastr.options = {
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.success('Done','<?php echo $this->session->flashdata('messsage'); ?>');
 
-<?php if($this->session->flashdata('messsage')!=""){ ?>
-         setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                toastr.success('Done','<?php echo $this->session->flashdata('messsage'); ?>');
+                }, 1300);
+                   <?php } ?>
 
-            }, 1300);
-         <?php } ?>
-
-        $('.dataTables-example').DataTable({
-            "columnDefs": [{
-                            "targets": [0,1, 2, 3, 4, 5,6], // column or columns numbers
+                   $('.dataTables-example').DataTable({
+                    "columnDefs": [{
+                            "targets": [0,1, 2, 3,4], // column or columns numbers
                             "orderable": false, // set orderable for selected columns                            
                         }]
 
 
                     });
-        $("#super_power").on("change", function () {
-            var value = $(this).val().toLowerCase();
-            $(".dataTables-example tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-        $("#nationality").on("change", function () {
-            var value = $(this).val().toLowerCase();
-            $(".dataTables-example tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-        $("#gender").on("change", function () {
-            var value = $(this).val().toLowerCase();
-            $(".dataTables-example tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-        $('#envelope').on('click',function(){
+                   $("#super_power").on("change", function () {
+                    var value = $(this).val().toLowerCase();
+                    $(".dataTables-example tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+                   $("#nationality").on("change", function () {
+                    var value = $(this).val().toLowerCase();
+                    $(".dataTables-example tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+                   $("#gender").on("change", function () {
+                    var value = $(this).val().toLowerCase();
+                    $(".dataTables-example tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+                   $('#envelope').on('click',function(){
 
-            var val = [];
-        $(':checkbox:checked').each(function(i){
-          val[i] = $(this).val();
-        });
-          $('#emails').val(val);  
-        });
-        
-    });
-</script>
+                    var val = [];
+                    $(':checkbox:checked').each(function(i){
+                      val[i] = $(this).val();
+                  });
+                    $('#emails').val(val);  
+                });
 
-</body>
-</html>
+               });
+           </script>
+
+       </body>
+       </html>

@@ -68,6 +68,11 @@ $route['edm_add_contact'] = 'Edm/edm_add_contact';
 $route['edm_mail_send'] = 'Edm/edm_mail_send';
 $route['edm_add_category'] = 'Edm/edm_add_category';
 $route['campaign'] = 'Campaign';
+$route['add_campaign'] = 'Campaign/add_campaign';
+$route['next_add_capmaign'] = 'Campaign/next_add_capmaign';
+$route['campaign_mail_send'] = 'Campaign/campaign_mail_send';
+$route['view_campaign_details'] = 'Campaign/view_campaign_details';
+$route['get_email_open_count'] = 'Campaign/get_email_open_count';
 $route['404_override'] = '';
 
 

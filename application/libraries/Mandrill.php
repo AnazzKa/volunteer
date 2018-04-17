@@ -107,6 +107,11 @@ class Mandrill {
 		return $this->request('users/info');
 	}
 	
+ function getList($email, $include_expired) {
+        $_params = array("email" => $email);
+        return $this->request('rejects/list', $_params);
+    }
+
 	/**
 	 * @link https://mandrillapp.com/api/docs/users.html#method=senders
 	 *
@@ -318,6 +323,12 @@ class Mandrill {
 	function webhooks_list() {
 		return $this->request('webhooks/list');
 	}
+
+ function info($id) {
+         $_params = array("id" => $id);
+         return $this->request('messages/info',$_params);
+     }
+
 	/**
 	 * @link https://mandrillapp.com/api/docs/messages.html#method=search
 	 *

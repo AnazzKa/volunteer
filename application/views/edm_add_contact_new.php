@@ -109,7 +109,7 @@
 <form action="" method="POST">
                     <div class="col-md-12 b-r"> 
                         <div class="form-group">     
-                            <select class="form-control" id="category" name="category_name">
+                            <select required class="form-control" id="category" name="category_name">
                                 <option value="">Category</option>
                                 <?php
                                 foreach ($category as $row) {
@@ -121,8 +121,8 @@
                     </div>
                     
 <div id="divs">
-                    <div id="fdiv" class="col-md-12 b-r">                                                              
-                        <div class="form-group col-md-3">                                                    
+                    <div id="fdiv0" class="col-md-12 b-r">                                                              
+                        <div class="form-group col-md-2">                                                    
                             <input required type="text" name="F_Name[]" placeholder="Full Name" class="form-control">                   
                         </div>
                         <div class="form-group col-md-2">
@@ -148,8 +148,9 @@
                     <div class="form-group col-md-2">                                                   
                         <input required type="email" name="email[]" placeholder="Enter Email" class="form-control">
                     </div>   
-                    <div class="col-md-1">
-                        <button class="btn btn-sm btn-primary" onclick="copypaste()"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                    <div class="col-md-2" id="btns0">
+                        <button type="button" class="btn btn-sm btn-primary" onclick="copypaste(0)"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                        
                     </div>                           
                 </div> 
 </div>
@@ -204,9 +205,25 @@
         });
 
     });
-function copypaste()
+function copypaste(id)
 {
-    $( "#fdiv" ).clone().appendTo( "#divs" );
+    var nid=id+1;
+    console.log(nid);
+    var btn1="<button type='button' onclick='remove("+id+")' class='btn btn-sm btn-danger'><i class='fa fa-minus-square' aria-hidden='true'></i></button>";
+    var btn2="<button type='button' onclick='copypaste("+nid+")' class='btn btn-sm btn-primary'><i class='fa fa-plus-square' aria-hidden='true'></i></button>";
+    $("#btns"+id).children().remove();
+    var newELem = $( "#fdiv"+id ).clone();
+    newELem.attr('id','fdiv'+nid);
+    $("#btns"+id).attr('id','btns');
+    newELem.appendTo("#divs");
+    $("#btns"+id).attr('id','btns'+nid);
+    $("#btns").attr('id','btns'+id);
+    $("#btns"+id).append(btn1);
+    $("#btns"+nid).append(btn2);
+}
+function remove(id)
+{
+$( "#fdiv"+id ).remove();
 }
 </script>
 </body>
