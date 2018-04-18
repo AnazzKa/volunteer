@@ -73,6 +73,7 @@ $route['next_add_capmaign'] = 'Campaign/next_add_capmaign';
 $route['campaign_mail_send'] = 'Campaign/campaign_mail_send';
 $route['view_campaign_details'] = 'Campaign/view_campaign_details';
 $route['get_email_open_count'] = 'Campaign/get_email_open_count';
+$route['get_category_options'] = 'Edm/get_category_options';
 $route['404_override'] = '';
 
 

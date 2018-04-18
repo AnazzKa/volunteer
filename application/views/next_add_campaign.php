@@ -64,7 +64,7 @@
               <div class="controls">
                 <select name="Templates" class="form-control">
                     <option value="">Default</option>
-                    <option value="vishunew">Vishu</option>
+                    <option value="test">Eid Mubarak</option>
                 </select>
               </div>
             </div>

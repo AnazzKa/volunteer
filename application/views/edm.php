@@ -99,17 +99,18 @@
                                             </div>
                                             <div class="form-group col-md-3">                                    
                                         <select onchange="this.form.submit()"  name="type" class="form-control">
-                                            <!-- <select id="type"  name="type" class="form-control"> -->
-                                                <option <?php if ($s_type == '') { ?>selected<?php } ?> value="">All Category</option><option <?php if ($s_type == 'Volunteer') { ?>selected<?php } ?> value="Volunteer">Volunteer</option>
+                                            <option <?php if ($s_type == '') { ?>selected<?php } ?> value="">Category</option>
+                                            <?php if($s_category == 'General' || $s_category == ''){ ?>
+                                                <option <?php if ($s_type == 'Volunteer') { ?>selected<?php } ?> value="Volunteer">Volunteer</option>
                                                 <option <?php if ($s_type == 'Contact') { ?>selected<?php } ?> value="Contact">Contact</option>
                                                 <option <?php if ($s_type == 'Appointment') { ?>selected<?php } ?> value="Appointment">Appointment</option>
                                                 <option <?php if ($s_type == 'SeminarRegistrationEnglish') { ?>selected<?php } ?> value="SeminarRegistrationEnglish">Seminar Registration English</option>
                                                 <option <?php if ($s_type == 'EpilepsyMasterclass') { ?>selected<?php } ?> value="EpilepsyMasterclass">Epilepsy Masterclass</option>
                                                 <option <?php if ($s_type == 'AcyanoticHeartDisease') { ?>selected<?php } ?> value="AcyanoticHeartDisease">Acyanotic Heart Disease</option>
+                                                <?php } if($s_category == 'edmlist' || $s_category == ''){ ?>
                                                 <?php foreach ($category as $row) { ?>
                                                             <option <?php if ($s_edm_category == $row->category_id) { ?>selected<?php } ?> value="<?php echo $row->category_id ?>"><?php echo $row->category_name ?></option>
-                                                            <?php }
-                                                            ?>
+                                                            <?php } } ?>
                                             </select>
                                         </div>
                                             <div class="form-group col-md-2">                                    
@@ -136,42 +137,13 @@
                                                 </div>
                                                 <div class="ibox-content">
 
-                                                    <div style="position:absolute;
-    left:40%;
-    ">
-                                                        
- <style>
-.loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-
-}
-
-/* Safari */
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-</style>
-<div class="loader"></div>
-
-                                                    </div>
-                                                    <div class="table-responsive" id="dvContents" hidden="">
+                                                   
+                                                    <div class="table-responsive" >
                                                         <table class="table dataTables-example" >
                                                             <thead style="background-color:#115E6E;color:#ffff;">
                                                                 <tr>
                                                                     <th>#</th>                                                       
-                                                                    <th><input type="checkbox"></th>                       
+                                                                    <!-- <th><input type="checkbox"></th>                        -->
                                                                     <th>Name</th>
                                                                     <th>Gender</th>
                                                                     <th>Nationality</th>
@@ -189,7 +161,7 @@
                                                                 ?>
                                                                 <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
                                                                     <td><?php echo $cnt; ?></td>
-                                                                    <td><input type="checkbox" name="vol[]" value="<?php echo $row->email; ?>"></td>
+                                                                    <!-- <td><input type="checkbox" name="vol[]" value="<?php //echo $row->email; ?>"></td> -->
                                                                     <td><?php echo $row->firstname; ?></td>                    
                                                                     <td><?php echo $row->gender; ?></td>
                                                                     <td><?php echo $row->nationality; ?></td>
@@ -208,7 +180,7 @@
                                                                 ?>
                                                                 <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
                                                                     <td><?php echo $cnt; ?></td>
-                                                                    <td><input type="checkbox" name="vol[]" value="<?php echo $row->email; ?>"></td>
+                                                                    <!-- <td><input type="checkbox" name="vol[]" value="<?php //echo $row->email; ?>"></td> -->
                                                                     <td><?php echo $row->full_name; ?></td>                    
                                                                     <td><?php echo $row->gender; ?></td>
                                                                     <td><?php echo $row->Nationality; ?></td>
@@ -234,7 +206,7 @@
                                                                     <?php } ?>
                                                                     <?php if ($row->field_order == 0) { ?>
                                                                     <td><?php echo $cnt; ?></td>  
-                                                                    <td><input type="checkbox" name="vol[]" value="<?php echo $data['contacts_ne'][3]->field_value; ?>"></td>  
+                                                                    <!-- <td><input type="checkbox" name="vol[]" value="<?php //echo $data['contacts_ne'][3]->field_value; ?>"></td>   -->
                                                                     <?php } ?>
                                                                     
                                                                     <?php if ($row->field_name == 'contact_first_name') { ?>
@@ -273,7 +245,7 @@
                                                                 <?php } ?>
                                                                 <?php if ($row->field_order == 0) { ?>
                                                                 <td><?php echo $cnt; ?></td>  
-                                                                <td><input type="checkbox" name="vol[]" value="<?php echo $data['appointment_ne'][3]->field_value; ?>"></td>  
+                                                                <!-- <td><input type="checkbox" name="vol[]" value="<?php //echo $data['appointment_ne'][3]->field_value; ?>"></td>   -->
                                                                 <?php } ?>
 
 
@@ -315,7 +287,7 @@
                                                         <?php } ?>
                                                         <?php if ($row->field_order == 0) { ?>
                                                         <td><?php echo $cnt; ?></td>  
-                                                        <td><input type="checkbox" name="vol[]" value="<?php echo $data['seminar_registration_ne'][4]->field_value; ?>"></td>
+                                                        <!-- <td><input type="checkbox" name="vol[]" value="<?php //echo $data['seminar_registration_ne'][4]->field_value; ?>"></td> -->
                                                         <?php } ?>
 
                                                         <?php if ($row->field_name == 'fullname') { ?>
@@ -358,7 +330,7 @@
                                                 <?php } ?>
                                                 <?php if ($row->field_order == 0) { ?>
                                                 <td><?php echo $cnt; ?></td>  
-                                                <td><input type="checkbox" name="vol[]" value="<?php echo $data['epilepsy_masterclass_ne'][3]->field_value; ?>"></td> 
+                                                <!-- <td><input type="checkbox" name="vol[]" value="<?php //echo $data['epilepsy_masterclass_ne'][3]->field_value; ?>"></td>  -->
                                                 <?php } ?>
 
                                                 <?php if ($row->field_name == 'fullname') { ?>
@@ -399,7 +371,7 @@
                                         <?php } ?>
                                         <?php if ($row->field_order == 0) { ?>
                                         <td><?php echo $cnt; ?></td>  
-                                        <td><input type="checkbox" name="vol[]" value="<?php echo $data['acyanotic_heart_disease_ne'][3]->field_value; ?>"></td>
+                                        <!-- <td><input type="checkbox" name="vol[]" value="<?php //echo $data['acyanotic_heart_disease_ne'][3]->field_value; ?>"></td> -->
                                         <?php } ?>
 
                                         <?php if ($row->field_name == 'fullname') { ?>
@@ -428,7 +400,7 @@
                         <tfoot>
                             <tr>
                                 <th>#</th>                                                       
-                                <th>#</th>                                                       
+                                <!-- <th>#</th>                                                        -->
                                 <th>Name</th>
                                 <th>Gender</th>
                                 <th>Nationality</th>
@@ -455,12 +427,12 @@
 <script>
     $(document).ready(function () {
 
-setTimeout(function() {
+// setTimeout(function() {
                 
-              $('#dvContents').show();
-              $('.loader').hide();  
+//               $('#dvContents').show();
+//               $('.loader').hide();  
 
-            }, 5000);
+//             }, 1000);
 
 <?php if($this->session->flashdata('messsage')!=""){ ?>
          setTimeout(function() {
@@ -477,7 +449,7 @@ setTimeout(function() {
 
         $('.dataTables-example').DataTable({
             "columnDefs": [{
-                            "targets": [0,1, 2, 3, 4, 5,6], // column or columns numbers
+                            "targets": [0,1, 2, 3, 4, 5], // column or columns numbers
                             "orderable": false,
                             // set orderable for selected columns   
                         }],

@@ -13,41 +13,41 @@
     <link href="<?php $base_url; ?>assets/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
     <link href="<?php $base_url; ?>assets/css/animate.css" rel="stylesheet">
     <link href="<?php $base_url; ?>assets/css/style.css" rel="stylesheet">
-
 </head>
-
 <body>
-
     <div id="wrapper">
-
         <?php $this->load->view('menu'); ?>
-
         <div id="page-wrapper" class="gray-bg">
             <?php $this->load->view('header'); ?>
-
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <?php if(!empty($campaign)){ ?>
                             <div class="ibox-content col-md-12">
-                                <div class="form-group col-md-2">                                    
-                                    <label>Date & Time</label>
+                                <div class="form-group col-md-3">                                    
+                                    <label>Date : <?php $dat = $campaign[0]->time;$arr = explode("-", $dat);$aarr = explode(" ", $arr[2]);echo $aarr[0] . "-" . $arr[1] . "-" . $arr[0];  ?></label>
                                 </div>
-                                <div class="form-group col-md-2">                                    
-                                    <p>: <?php echo $campaign[0]->time; ?></p>
+                                <div class="form-group col-md-3">                                    
+                                    <label>Time : <?php $dat = $campaign[0]->time;$aarr = explode(" ", $dat);echo $aarr[1]  ?> </label>
                                 </div>
-                                <div class="form-group col-md-2">                                    
-                                    <label>Campaign Name</label>
+                                <div class="form-group col-md-3">                                    
+                                    <label>Campaign Name : <?php echo $campaign[0]->campaign_name; ?></label>
                                 </div>
-                                <div class="form-group col-md-2">                                    
-                                    <p>: <?php echo $campaign[0]->campaign_name; ?></p>
+                                <div class="form-group col-md-3">                                    
+                                    <label>Description : <?php echo $campaign[0]->description; ?></label>
                                 </div>
-                                <div class="form-group col-md-2">                                    
-                                    <label>Description </label>
+                                <div class="form-group col-md-3">   
+                                    <label>Total Mails :<?php echo count($mails); ?></label>                                 
                                 </div>
-                                <div class="form-group col-md-2">                                    
-                                    <p>: <?php echo $campaign[0]->description; ?></p>
+                                <div class="form-group col-md-3">   
+                                    <label>Delivered :<?php echo $sent_cnt[0]->cnt; ?></label>                                 
+                                </div>
+                                <div class="form-group col-md-3">   
+                                    <label>Rejected :<?php echo $rej_cnt[0]->cnt; ?></label>                                 
+                                </div>
+                                <div class="form-group col-md-3">   
+                                    <label id="open_cnt">Opens : </label>                                 
                                 </div>
                             </div>
                             
@@ -79,10 +79,10 @@
                                                     else if($sts=='rejected'){ echo "<span class='label label-danger'>Rejected</span>";}
                                                     ?></td>
                                                     <td id="op_<?php echo $row->eamil_id; ?>">
-                                                        
+
                                                     </td>
                                                     <td id="cl_<?php echo $row->eamil_id; ?>">
-                                                        
+
                                                     </td>
                                                 </tr>                                            
                                                 <?php } ?>
@@ -127,24 +127,26 @@
         <?php $this->load->view('script'); ?>
         <script>
             $(document).ready(function () {
-               $('.dataTables-example').DataTable({
+             $('.dataTables-example').DataTable({
                 "columnDefs": [{
                             "targets": [0,1, 2, 3,4], // column or columns numbers
                             "orderable": false, // set orderable for selected columns                            
                         }]
                     });
 
-               setTimeout(function() {
-                 get_count();
+             setTimeout(function() {
+               get_count();
 
-             }, 1000);
+           }, 1000);
 
 
 
-               function get_count()
-               {
+             function get_count()
+             {
+                 var op=0;
                 $('input[name^="emails"]').each(function () {
                     var email=this.value;
+                   
                     if(email!=''){
                         $.ajax({
                             type: "POST",
@@ -155,13 +157,16 @@
                                 var data = JSON.parse(response);
                                 $('#op_'+email).text(data.opens);
                                 $('#cl_'+email).text(data.clicks);
-                                
+                                if(data.opens>0){
+                                    op+=1;
+                                }
                             }
                         });
 
                     }
 
                 });
+                $('#open_cnt').text('Opens : '+op)
             }
         });
     </script>

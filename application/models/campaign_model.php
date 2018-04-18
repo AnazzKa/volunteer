@@ -10,7 +10,9 @@ class Campaign_model extends CI_Model {
     }
     public function get_all()
     {
-    	$query = $this->db->get('al_campaign');
+        $this->db->from('al_campaign');
+        $this->db->order_by("campaignid", "desc");
+        $query = $this->db->get();
         return $query->result();
     }
     public function add($query) {
@@ -29,6 +31,11 @@ class Campaign_model extends CI_Model {
     public function get_mails($id)
     {
         $query = $this->db->get_where('al_campaign_mails',array('campaign_id' => $id ));
+        return $query->result();
+    }
+    public function get_count($id,$sts)
+    {
+        $query = $this->db->query("SELECT COUNT(*) AS 'cnt' FROM `al_campaign_mails` WHERE `campaign_id`=$id and `status`='$sts'");
         return $query->result();
     }
 }

@@ -55,7 +55,7 @@
                                         <form role="form" method="post" action="<?php $base_url ?>next_add_capmaign" enctype="multipart/form-data">
                                             <div class="col-sm-6 b-r">                                                                
                                                 <div class="form-group">      
-                                            <select  name="type" class="form-control">
+                                            <select onchange="get_cateory(this.value)"  name="type" class="form-control">
                                                 <!-- <select id="category"  name="category" class="form-control"> -->
                                                     <option <?php if ($s_category == '') { ?>selected<?php } ?> value="">All Type</option>
                                                     <option <?php if ($s_category == 'General') { ?>selected<?php } ?> value="General">General</option>
@@ -63,7 +63,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">                                    
-                                        <select  name="category" class="form-control">
+                                        <select id="category" name="category" class="form-control">
                                             <!-- <select id="type"  name="type" class="form-control"> -->
                                                 <option <?php if ($s_type == '') { ?>selected<?php } ?> value="">All Category</option><option <?php if ($s_type == 'Volunteer') { ?>selected<?php } ?> value="Volunteer">Volunteer</option>
                                                 <option <?php if ($s_type == 'Contact') { ?>selected<?php } ?> value="Contact">Contact</option>
@@ -112,11 +112,22 @@
 
         <script>
             $(document).ready(function () {
-                $('.i-checks').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
-                });
+
             });
+            function get_cateory(id)
+                {
+                    $.ajax({
+                            type: "POST",
+                            url: "<?php $base_url ?>get_category_options",
+                            async: false,
+                            data: {id:id},
+                            success: function (response) {
+                                console.log(response);
+                                $("#category option").remove();
+                                $('#category').append(response);
+                            }
+                        });
+                }
         </script>
     </body>
 </html>

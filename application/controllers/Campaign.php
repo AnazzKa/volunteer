@@ -116,7 +116,7 @@ public function campaign_mail_send()
    if(!empty($tem))
     $Templates=$tem;
 else
-    $Templates='firsttemplate';
+    $Templates='normal';
     //echo $_POST['emails'];
 $arr= explode(",",$_POST['emails']);
     //echo count($arr);
@@ -160,7 +160,7 @@ if ($mandrill_ready) {
                     'to' => $emails //Check documentation for more details on this one
                         //'to' => array(array('email' => 'joe@example.com' ),array('email' => 'joe2@example.com' )) //for multiple emails
                 );
-   // $result = $this->mandrill->messages_send_template($temlate_name,$template_content,$email);
+    $result = $this->mandrill->messages_send_template($temlate_name,$template_content,$email);
 }
 foreach ($result as $arr) {
 
@@ -185,7 +185,8 @@ public function view_campaign_details()
     $id = my_simple_crypt($str, 'd');
     $data['campaign'] = $this->campaign_model->get_single($id);
     $data['mails'] = $this->campaign_model->get_mails($id);
-
+    $data['sent_cnt']=$this->campaign_model->get_count($id,'sent');
+    $data['rej_cnt']=$this->campaign_model->get_count($id,'rejected');
     
     $this->load->view('view_campaign_details', $data);
 }

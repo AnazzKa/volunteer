@@ -36,7 +36,7 @@
 
                             <div class="ibox-content col-md-12">
                                 <div class="form-group col-md-1">                                    
-                                    <a href="<?php $base_url ?>add_campaign"><button class="btn btn-primary">Add Campaign</button></a>
+                                    <a href="<?php $base_url ?>add_campaign"><button class="btn btn-primary">Add New Campaign</button></a>
                                 </div>
                             </div>
                             <?php if(!empty($campaign)){ ?>
@@ -47,6 +47,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Date</th>
+                                                <th>Time</th>
                                                 <th>campaign Name</th>
                                                 <th>Discription</th>
                                                 <th>#</th>                                                  
@@ -63,7 +64,8 @@
                                                 
                                                     <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
                                                         <td><?php echo $cnt; ?></td>                                             
-                                                        <td><?php echo $row->time; ?></td>                    
+                                                        <td><?php  $dat = $row->time;$arr = explode("-", $dat);$aarr = explode(" ", $arr[2]);echo $aarr[0] . "-" . $arr[1] . "-" . $arr[0];  ?> </td>                    
+                                                        <td><?php  $dat = $row->time;$aarr = explode(" ", $dat);echo $aarr[1]  ?></td>                    
                                                         <td><?php echo $row->campaign_name; ?></td>
                                                         <td><?php echo $row->description; ?></td>
                                                         <td><a href="<?php $base_url; ?>view_campaign_details?camp=<?php echo my_simple_crypt($row->campaignid,'e'); ?>"><button class="btn btn-primary"><i class="fa fa-arrow-right"></i></button></a></td>                                                   
@@ -75,6 +77,7 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Date</th>
+                                                    <th>Time</th>
                                                     <th>campaign Name</th>
                                                     <th>Discription</th>
                                                     <th>#</th>                                                          

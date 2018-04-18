@@ -121,16 +121,16 @@ class Edm extends CI_Controller {
          //echo count($arr);
     $emails=array();
     foreach ($arr as $s) {
-     $emails[]= array( "email" => "$s");
- }
+       $emails[]= array( "email" => "$s");
+   }
         // echo "<pre>";print_r($emails);
          // echo "<pre>";print_r($arr);
- $subject = $_POST['subject'];
- $messsage = $_POST['messageinput'];
- $this->load->config('mandrill');
- $this->load->library('mandrill');
- $mandrill_ready = NULL;
- try {
+   $subject = $_POST['subject'];
+   $messsage = $_POST['messageinput'];
+   $this->load->config('mandrill');
+   $this->load->library('mandrill');
+   $mandrill_ready = NULL;
+   try {
     $this->mandrill->init($this->config->item('mandrill_api_key'));
     $mandrill_ready = TRUE;
 } catch (Mandrill_Exception $e) {
@@ -174,9 +174,26 @@ public function edm_add_category()
     $variable = $this->edm_model->get_category();   
     $res="<option value=''>Category</option>";    
     foreach ($variable as $value) {
-       $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
-   }
-   echo $res;
+     $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
+ }
+ echo $res;
 
+}
+public function get_category_options()
+{
+    $res="<option value=''>Category</option>"; 
+    if($_POST['id']=='edmlist' || $_POST['id']=='')
+    {
+      $variable = $this->edm_model->get_category();   
+      foreach ($variable as $value) {
+         $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
+     }
+     
+ }
+ if($_POST['id']=='General' || $_POST['id']=='')
+ {
+    $res.="<option value='Volunteer'>Volunteer</option><option  value='Contact'>Contact</option><option  value='Appointment'>Appointment</option><option  value='SeminarRegistrationEnglish'>Seminar Registration English</option><option  value='EpilepsyMasterclass'>Epilepsy Masterclass</option><option  value='AcyanoticHeartDisease'>Acyanotic Heart Disease</option>";
+ }
+ echo $res;
 }
 }
