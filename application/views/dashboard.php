@@ -22,7 +22,8 @@
                 <?php $this->load->view('header'); ?>
 
                 <div class="row  border-bottom white-bg dashboard-header">
-                    <?php if ($noti != "") { ?>
+                    <?php 
+                    if (count($noti)>0) { ?>
                         <div class="col-lg-12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title navy-bg" style="background: #115E6E;color: #fff">

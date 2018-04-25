@@ -74,6 +74,9 @@ $route['campaign_mail_send'] = 'Campaign/campaign_mail_send';
 $route['view_campaign_details'] = 'Campaign/view_campaign_details';
 $route['get_email_open_count'] = 'Campaign/get_email_open_count';
 $route['get_category_options'] = 'Edm/get_category_options';
+$route['edm_dashboard'] = 'Edm/edm_dashboard';
+$route['get_all_edm_data'] = 'Edm/get_all_edm_data';
+$route['import_excel_edm_contact'] = 'Edm/import_excel_edm_contact';
 $route['404_override'] = '';
 
 

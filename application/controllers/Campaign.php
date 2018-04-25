@@ -55,16 +55,16 @@ class Campaign extends CI_Controller {
         $category=$_POST['category'];
         $campaign_name=$_POST['campaign_name'];
         $decription=$_POST['decription'];
+        date_default_timezone_set('America/Chicago'); // CDT
+        $current_date = date('Y/m/d H:i:s');
         $arr =array(
-            'time' => date('Y-m-d H:i:s'),
+            'time' => $current_date,
             'campaign_name' => $campaign_name,                    
             'description' => $decription,                    
             'type' => $type,                    
             'category_id' => $category,
-
         );
         $data['last_id'] = $this->campaign_model->add($arr);
-
     }
     if(($category=='Volunteer' && $type=="General" ))
         $data['volunteer'] = $this->users_model->get_volunteer($query);
@@ -103,7 +103,7 @@ class Campaign extends CI_Controller {
 
     if($category!='Volunteer' && $category!='Contact'&& $category!='Appointment'&& $category!='SeminarRegistrationEnglish'&& $category!='EpilepsyMasterclass'&& $category!='AcyanoticHeartDisease'  && $type=="edmlist"){
         $data['s_edm_category']=$_POST['type'];
-        $data['edmlist']=$this->edm_model->get_all($_POST['type']);
+        $data['edmlist']=$this->edm_model->get_all($_POST['category']);
     }
 
     $this->load->view('next_add_campaign', $data);
@@ -111,12 +111,19 @@ class Campaign extends CI_Controller {
 public function campaign_mail_send()
 {
    $tem = $_POST['Templates'];
-   $subject = $_POST['subject'];
-   $messsage = $_POST['messageinput'];
+
    if(!empty($tem))
+   {
     $Templates=$tem;
+    $subject = $_POST['subject'];
+    $messsage = "";
+}
 else
+{
     $Templates='normal';
+    $subject = $_POST['subject'];
+    $messsage = $_POST['messageinput'];
+}
     //echo $_POST['emails'];
 $arr= explode(",",$_POST['emails']);
     //echo count($arr);
@@ -156,7 +163,7 @@ if ($mandrill_ready) {
                     'text' => 'This is my plaintext message',
                     'subject' => $subject,
                     'from_email' => 'mail@media.ajch.ae',
-                    'from_name' => 'Contact Form',
+                    'from_name' => 'aljalilachildrens',
                     'to' => $emails //Check documentation for more details on this one
                         //'to' => array(array('email' => 'joe@example.com' ),array('email' => 'joe2@example.com' )) //for multiple emails
                 );
@@ -174,7 +181,8 @@ foreach ($result as $arr) {
 $this->campaign_model->add_mail_details($qry);
 $msg="Mail Send Sucessfully";
 $this->session->set_flashdata('messsage', $msg);
-redirect('campaign', 'refresh');  
+ redirect('campaign');
+
 }
 
 public function view_campaign_details()
@@ -190,22 +198,26 @@ public function view_campaign_details()
     
     $this->load->view('view_campaign_details', $data);
 }
- function get_email_open_count()
+function get_email_open_count()
 {
-        $id=$_POST['email'];
-        $this->load->config('mandrill');
-        $this->load->library('mandrill');
-        $mandrill_ready = NULL;
-        try {
-            $this->mandrill->init($this->config->item('mandrill_api_key'));
-            $mandrill_ready = TRUE;
-        } catch (Mandrill_Exception $e) {
-            $mandrill_ready = FALSE;
-        }
-        if ($mandrill_ready) {        
-            $arr=$this->mandrill->info($id);
-        }
-   echo json_encode($arr);  
+    $id=$_POST['email'];
+    // $id='a8460391fc704b82bc0505d53851271a';
+    $this->load->config('mandrill');
+    $this->load->library('mandrill');
+    $mandrill_ready = NULL;
+    try {
+        $this->mandrill->init($this->config->item('mandrill_api_key'));
+        $mandrill_ready = TRUE;
+    } catch (Mandrill_Exception $e) {
+        $mandrill_ready = FALSE;
+    }
+    if ($mandrill_ready) {        
+        $arr=$this->mandrill->info($id);
+    }
+    echo json_encode($arr);  
 }
-
+function get_return_mail()
+{
+    echo "apro";
+}
 }

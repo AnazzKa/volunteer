@@ -50,12 +50,9 @@
                               <div class="modal-dialog modal-md">
                                 <div class="modal-content">
                                     <br>
-
-
                                     <div class="modal-body">
                                         <div id="myTabContent" class="tab-content">
                                             <div class="tab-pane fade active in" id="signin">
-
                                                 <fieldset>
                                                     <!-- Sign In Form -->
                                                     <div class="control-group">
@@ -64,13 +61,11 @@
                                                   <label class="control-label" for="userid">New Category Add</label>
                                                   <!-- Text input-->
                                                   <div class="control-group">
-
                                                       <div class="controls">
                                                         <input required=""  id="category_name" type="text" class="form-control input-medium" placeholder="Name">
                                                     </div>
                                                 </div> 
                                                 <div class="control-group">
-
                                                   <div class="controls">
                                                     <textarea  id="category_description" type="text" class="form-control input-medium" placeholder="Decription"></textarea>
                                                 </div>
@@ -79,9 +74,53 @@
                                             <div class="control-group">
                                               <label class="control-label" for="signin"></label>
                                               <div class="controls pull-right" >
-                                                <button id="category_save" type="submit" name="save" class="btn btn-success">Save</button>
+                                                <button id="category_save" type="submit" name="save" data-dismiss="modal" class="btn btn-success">Save</button>
                                             </div>
                                         </div>
+                                    </fieldset>
+
+                                </div>
+
+                            </div>
+                        </div>            
+
+                    </div>
+                </div>
+            </div>
+            <!-- model box end -->
+
+             <!-- Modal -->
+                            <div class="modal fade export" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <br>
+                                    <div class="modal-body">
+                                        <div id="myTabContent" class="tab-content">
+                                            <div class="tab-pane fade active in" id="export">
+                                                <fieldset>
+                                                    <!-- Sign In Form -->
+                                                    <form action="<?php $base_url ?>import_excel_edm_contact" method="post" enctype="multipart/form-data" >
+                                                    <div class="control-group">
+                                                  <label class="control-label" for="userid">Eport Excel</label>
+                                                  <!-- Text input-->
+                                                  <div class="control-group">
+                                                      <div class="controls">
+                                                        <input required=""  name="export_category_name" type="text" class="form-control input-medium" placeholder="category_name">
+                                                    </div>
+                                                </div> 
+                                                <div class="control-group">
+                                                  <div class="controls">
+                                                    <input required=""  name="export_excel_file" type="file" class="form-control input-medium" >
+                                                </div>
+                                            </div>                    
+                                            <!-- Button -->
+                                            <div class="control-group">
+                                              <label class="control-label" for="signin"></label>
+                                              <div class="controls pull-right" >
+                                                <button id="export_excel" type="submit" name="save"  class="btn btn-success">Export</button>
+                                            </div>
+                                        </div>
+</form>
                                     </fieldset>
 
                                 </div>
@@ -98,6 +137,12 @@
                 <div class="pull-right">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary" id="envelope" href="#signup" data-toggle="modal" data-target=".bs-modal-md">Add Category</button>
+                    </div>
+                </div>
+
+                <div class="pull-right" style="margin-right:2px">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" id="envelope" href="#export" data-toggle="modal" data-target=".export">Export Excel</button>
                     </div>
                 </div>
 
@@ -184,10 +229,10 @@
                 url: "edm_add_category",
                 async: false,
                 data: {cat:cat,des:des},
-                success: function (response) { 
-                 $('#category options').remove();
+                success: function (response) {
+                 $('#category').html('');
                  $('#category').append(response);
-
+                 $('.bs-modal-md').hide();
                  setTimeout(function() {
                     toastr.options = {
                         closeButton: true,

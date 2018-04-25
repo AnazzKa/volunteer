@@ -47,3 +47,7 @@
     <script src="<?php $base_url; ?>assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="<?php $base_url; ?>assets/js/plugins/dataTables/dataTables.responsive.js"></script>
     <script src="<?php $base_url; ?>assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+
+   
+     <script src="<?php $base_url; ?>assets/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="<?php $base_url; ?>assets/js/plugins/morris/morris.js"></script>

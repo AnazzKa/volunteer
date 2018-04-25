@@ -25,5 +25,6 @@ public function add($query) {
     }
     public function add_category($query){
         $this->db->insert('al_category', $query);
+        return $this->db->insert_id();
     }
 }

@@ -125,17 +125,13 @@
                         timeOut: 4000
                     };
                     toastr.success('Done','<?php echo $this->session->flashdata('messsage'); ?>');
-
                 }, 1300);
                    <?php } ?>
-
                    $('.dataTables-example').DataTable({
                     "columnDefs": [{
                             "targets": [0,1, 2, 3,4], // column or columns numbers
                             "orderable": false, // set orderable for selected columns                            
                         }]
-
-
                     });
                    $("#super_power").on("change", function () {
                     var value = $(this).val().toLowerCase();

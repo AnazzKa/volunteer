@@ -64,13 +64,11 @@
               <div class="controls">
                 <select name="Templates" class="form-control">
                     <option value="">Default</option>
-                    <option value="test">Eid Mubarak</option>
+                    <option value="HeartEDM">Heart EDM</option>
+                    <option value="HeartSeminarEDM">Heart Seminar EDM</option>
                 </select>
               </div>
-            </div>
-            <div class="control-group">
-             <center> <label class="control-label fa-2x" for="userid">OR</label></center>
-            </div>
+            </div>            
             <!-- Text input-->
             <div class="control-group">
               <label class="control-label" for="userid">Subject</label>
@@ -82,7 +80,7 @@
             <div class="control-group">
               <label class="control-label" for="passwordinput">Message</label>
               <div class="controls">
-                <textarea required="" id="messageinput" name="messageinput" class="form-control input-medium" placeholder="Message"></textarea>
+                <textarea  id="messageinput" name="messageinput" class="form-control input-medium" placeholder="Message"></textarea>
               </div>
             </div>                
             <!-- Button -->

@@ -215,7 +215,9 @@
                 });
                 $("#gender").on("change", function () {
                     var value = $(this).val().toLowerCase();
-                    $(".dataTables-example tr").filter(function () {
+                    console.log($(this).val());
+                    console.log($(this).text());
+                    $(".dataTables-example tr").filter(function () {                        
                         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
