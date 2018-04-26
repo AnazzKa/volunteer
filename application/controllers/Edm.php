@@ -140,16 +140,16 @@ class Edm extends CI_Controller {
          //echo count($arr);
     $emails=array();
     foreach ($arr as $s) {
-       $emails[]= array( "email" => "$s");
-   }
+     $emails[]= array( "email" => "$s");
+ }
         // echo "<pre>";print_r($emails);
          // echo "<pre>";print_r($arr);
-   $subject = $_POST['subject'];
-   $messsage = $_POST['messageinput'];
-   $this->load->config('mandrill');
-   $this->load->library('mandrill');
-   $mandrill_ready = NULL;
-   try {
+ $subject = $_POST['subject'];
+ $messsage = $_POST['messageinput'];
+ $this->load->config('mandrill');
+ $this->load->library('mandrill');
+ $mandrill_ready = NULL;
+ try {
     $this->mandrill->init($this->config->item('mandrill_api_key'));
     $mandrill_ready = TRUE;
 } catch (Mandrill_Exception $e) {
@@ -193,9 +193,9 @@ public function edm_add_category()
     $variable = $this->edm_model->get_category();   
     $res="<option value=''>Category</option>";    
     foreach ($variable as $value) {
-     $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
- }
- echo $res;
+       $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
+   }
+   echo $res;
 
 }
 public function get_category_options()
@@ -205,12 +205,12 @@ public function get_category_options()
     {
       $variable = $this->edm_model->get_category();   
       foreach ($variable as $value) {
-         $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
-     }
+       $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
+   }
 
- }
- if($_POST['id']=='General' || $_POST['id']=='')
- {
+}
+if($_POST['id']=='General' || $_POST['id']=='')
+{
     $res.="<option value='Volunteer'>Volunteer</option><option  value='Contact'>Contact</option><option  value='Appointment'>Appointment</option><option  value='SeminarRegistrationEnglish'>Seminar Registration English</option><option  value='EpilepsyMasterclass'>Epilepsy Masterclass</option><option  value='AcyanoticHeartDisease'>Acyanotic Heart Disease</option>";
 }
 echo $res;
@@ -250,12 +250,12 @@ public function get_all_edm_data()
 
         $contacts = $this->contact_model->get_all(0, 0);
         foreach ($contacts as $key) {
-           $cnt++;
-           $tme = $key->submit_time;
-           $contacts_ne = $this->contact_model->get_all(1, $tme);
+         $cnt++;
+         $tme = $key->submit_time;
+         $contacts_ne = $this->contact_model->get_all(1, $tme);
           //echo "<pre>";print_r($contacts);
 
-           foreach ($contacts_ne as $row) {
+         foreach ($contacts_ne as $row) {
             if ($row->field_name == 'contact_first_name')
                 $full_name=$row->field_value;
 
@@ -291,10 +291,10 @@ if(($type=='Appointment' || $type=="") && ($category=="General" || $category==""
     $appointment = $this->appointment_model->get_all(0, 0); 
 
     foreach ($appointment as $key) {
-       $cnt++;
-       $tme = $key->submit_time;
-       $appointment_ne = $this->appointment_model->get_all(1, $tme);
-       foreach ($appointment_ne as $row) {
+     $cnt++;
+     $tme = $key->submit_time;
+     $appointment_ne = $this->appointment_model->get_all(1, $tme);
+     foreach ($appointment_ne as $row) {
         if ($row->field_name == 'firstname')
             $full_name=$row->field_value;
 
@@ -328,10 +328,10 @@ else{
 if(($type=='SeminarRegistrationEnglish' || $type=="") && ($category=="General" || $category=="") ){
     $seminar_registration= $this->seminar_registration_model->get_all(0, 0);
     foreach ($seminar_registration as $key) {
-       $cnt++;
-       $tme = $key->submit_time;
-       $seminar_registration_ne = $this->seminar_registration_model->get_all(1, $tme);
-       foreach ($seminar_registration_ne as $row) {
+     $cnt++;
+     $tme = $key->submit_time;
+     $seminar_registration_ne = $this->seminar_registration_model->get_all(1, $tme);
+     foreach ($seminar_registration_ne as $row) {
         if ($row->field_name == 'fullname')
             $full_name=$row->field_value;
 
@@ -365,10 +365,10 @@ else{
 if(($type=='EpilepsyMasterclass' || $type=="") && ($category=="General" || $category=="")  ){
     $epilepsy_masterclass = $this->epilepsy_masterclass_model->get_all(0, 0); 
     foreach ($epilepsy_masterclass as $key) {
-       $cnt++;
-       $tme = $key->submit_time;
-       $epilepsy_masterclass_ne = $this->epilepsy_masterclass_model->get_all(1, $tme);
-       foreach ($epilepsy_masterclass_ne as $row) {
+     $cnt++;
+     $tme = $key->submit_time;
+     $epilepsy_masterclass_ne = $this->epilepsy_masterclass_model->get_all(1, $tme);
+     foreach ($epilepsy_masterclass_ne as $row) {
         if ($row->field_name == 'fullname')
             $full_name=$row->field_value;
 
@@ -402,10 +402,10 @@ else{
 if(($type=='AcyanoticHeartDisease' || $type=="") && ($category=="General" || $category=="") ){
     $acyanotic_heart_disease = $this->acyanotic_heart_disease_model->get_all(0, 0); 
     foreach ($acyanotic_heart_disease as $key) {
-       $cnt++;
-       $tme = $key->submit_time;
-       $acyanotic_heart_disease_ne = $this->acyanotic_heart_disease_model->get_all(1, $tme);
-       foreach ($acyanotic_heart_disease_ne as $row) {
+     $cnt++;
+     $tme = $key->submit_time;
+     $acyanotic_heart_disease_ne = $this->acyanotic_heart_disease_model->get_all(1, $tme);
+     foreach ($acyanotic_heart_disease_ne as $row) {
         if ($row->field_name == 'fullname')
             $full_name=$row->field_value;
 
@@ -459,14 +459,14 @@ else{
 
 if($type!='Volunteer' && $type!='Contact'&& $type!='Appointment'&& $type!='SeminarRegistrationEnglish'&& $type!='EpilepsyMasterclass'&& $type!='AcyanoticHeartDisease'  && $category=="edmlist"){
     if($_POST['type']!=0)
-    $edmlist=$this->edm_model->get_all($_POST['type']);
-else
-    $edmlist=$this->edm_model->get_all(0);
+        $edmlist=$this->edm_model->get_all($_POST['type']);
+    else
+        $edmlist=$this->edm_model->get_all(0);
 
     foreach ($edmlist as $key) {
-       $cnt++;
+     $cnt++;
      // $arr2[]=array(
-       array_push($full_arr,array(
+     array_push($full_arr,array(
         $cnt, 
         $key->full_name,
         $key->gender,
@@ -474,55 +474,52 @@ else
         $key->phone,
         $key->email
     )
-   ); 
-   }
+ ); 
+ }
 }
 echo json_encode($full_arr);
 }
 public function import_excel_edm_contact()
 {
+   //error_reporting(E_ALL);
+ //ini_set('display_errors', TRUE);
+ //ini_set('display_startup_errors', TRUE);
+
     $category=$_POST['export_category_name'];
     $query = array(
         'category_name' => $category,
         'description' => ''
     );
     $result = $this->edm_model->add_category($query);
-
     $this->load->library('excel');
     //Path of files were you want to upload on localhost (C:/xampp/htdocs/ProjectName/uploads/excel/)    
-   $configUpload['upload_path'] = FCPATH.'uploads/excel/';
-   $configUpload['allowed_types'] = 'xls|xlsx|csv';
-   $configUpload['max_size'] = '5000';
-   $this->load->library('upload', $configUpload);
-   $this->upload->do_upload('export_excel_file');  
+    $configUpload['upload_path'] = FCPATH.'uploads/excel/';
+    $configUpload['allowed_types'] = '*';
+    $configUpload['max_size'] = '5000';
+    $this->load->library('upload', $configUpload);
+    $this->upload->do_upload('export_excel_file');  
          $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
          $file_name = $upload_data['file_name']; //uploded file name
          $extension=$upload_data['file_ext'];    // uploded file extension
-
-$inputFileType = PHPExcel_IOFactory::identify(FCPATH.'uploads/excel/'.$file_name);
-$objReader =PHPExcel_IOFactory::createReader($inputFileType);    
-
+         PHPExcel_Settings::setZipClass(PHPExcel_Settings::PCLZIP);
+         $inputFileType = PHPExcel_IOFactory::identify(FCPATH.'uploads/excel/'.$file_name);
+         $objReader =PHPExcel_IOFactory::createReader($inputFileType); 
           //Set to read only
-     $objReader->setReadDataOnly(true);          
-        //Load excel file
-     $objPHPExcel=$objReader->load(FCPATH.'uploads/excel/'.$file_name);      
+         $objReader->setReadDataOnly(true);          
+         //Load excel file
+         $objPHPExcel=$objReader->load(FCPATH.'uploads/excel/'.$file_name);      
          $totalrows=$objPHPExcel->setActiveSheetIndex(0)->getHighestRow();   //Count Numbe of rows avalable in excel         
          $objWorksheet=$objPHPExcel->setActiveSheetIndex(0);                
           //loop from first data untill last data
          for($i=2;$i<=$totalrows;$i++)
          {
-              $FirstName= $objWorksheet->getCellByColumnAndRow(0,$i)->getValue();           
-              $Email= $objWorksheet->getCellByColumnAndRow(1,$i)->getValue(); //Excel Column 1
-              $Mobile= $objWorksheet->getCellByColumnAndRow(2,$i)->getValue(); //Excel Column 2
-              $data_user[]=array('entry_time' => date('Y-m-d H:i:s'),'full_name'=>$FirstName ,'email'=>$Email ,'phone'=>$Mobile , 'category_id'=>$result);
-              
-              
-
+             $FirstName= $objWorksheet->getCellByColumnAndRow(0,$i)->getValue();           
+             $Email= $objWorksheet->getCellByColumnAndRow(1,$i)->getValue(); //Excel Column 1
+             $Mobile= $objWorksheet->getCellByColumnAndRow(2,$i)->getValue(); //Excel Column 2
+             $data_user[]=array('entry_time' => date('Y-m-d H:i:s'),'full_name'=>$FirstName ,'email'=>$Email ,'phone'=>$Mobile , 'category_id'=>$result);
           }
-            $result = $this->edm_model->add($data_user);
-             //unlink('././uploads/excel/'.$file_name); //File Deleted After uploading in database .           
-             redirect(base_url() . "edm_add_contact");
-
-
-         }
-     }
+              $result = $this->edm_model->add($data_user);
+             //unlink('././uploads/excel/'.$file_name); //File Deleted After uploading in database .       
+             redirect($base_url. "edm_add_contact");
+      }
+  }
