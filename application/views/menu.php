@@ -11,11 +11,7 @@
                 <div class="logo-element">
                     AJCS
                 </div>
-            </li>
-
-            <li>
-                <a href="<?php $base_url ?>dashboard"><i class="fa fa fa-th-large"></i> <span class="nav-label">Dashboard</span> <span class="fa arrow"></span></a>                        
-            </li>     
+            </li>   
 
             <?php
             $user_id = $this->session->userdata('userid');

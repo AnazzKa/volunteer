@@ -100,7 +100,7 @@ class Edm extends CI_Controller {
         $data['edmlist']=$this->edm_model->get_all(0);
         $data['campaign_cnt'] = $this->campaign_model->get_all();
         $data['total_mail']=$this->users_model->get_volunteer("SELECT COUNT(*) AS 'cnt' FROM `al_campaign_mails` WHERE `eamil_id`!=''");
-        $data['rejected']=$this->users_model->get_volunteer("SELECT COUNT(*) AS 'cnt' FROM `al_campaign_mails` WHERE `email`!='' AND `status`='rejected'");
+        $data['rejected']=$this->users_model->get_volunteer("SELECT COUNT(*) AS 'cnt' FROM `al_campaign_mails` WHERE `email`!='' AND `status`!='sent'");
         $data['delivered']=$this->users_model->get_volunteer("SELECT COUNT(*) AS 'cnt' FROM `al_campaign_mails` WHERE `email`!='' AND `status`='sent'");
         $this->load->view('edm_dashboard', $data);
     }
@@ -140,16 +140,16 @@ class Edm extends CI_Controller {
          //echo count($arr);
     $emails=array();
     foreach ($arr as $s) {
-     $emails[]= array( "email" => "$s");
- }
+       $emails[]= array( "email" => "$s");
+   }
         // echo "<pre>";print_r($emails);
          // echo "<pre>";print_r($arr);
- $subject = $_POST['subject'];
- $messsage = $_POST['messageinput'];
- $this->load->config('mandrill');
- $this->load->library('mandrill');
- $mandrill_ready = NULL;
- try {
+   $subject = $_POST['subject'];
+   $messsage = $_POST['messageinput'];
+   $this->load->config('mandrill');
+   $this->load->library('mandrill');
+   $mandrill_ready = NULL;
+   try {
     $this->mandrill->init($this->config->item('mandrill_api_key'));
     $mandrill_ready = TRUE;
 } catch (Mandrill_Exception $e) {
@@ -193,9 +193,9 @@ public function edm_add_category()
     $variable = $this->edm_model->get_category();   
     $res="<option value=''>Category</option>";    
     foreach ($variable as $value) {
-       $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
-   }
-   echo $res;
+     $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
+ }
+ echo $res;
 
 }
 public function get_category_options()
@@ -205,12 +205,12 @@ public function get_category_options()
     {
       $variable = $this->edm_model->get_category();   
       foreach ($variable as $value) {
-       $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
-   }
+         $res.="<option value='".$value->category_id."'>".$value->category_name."</option>";
+     }
 
-}
-if($_POST['id']=='General' || $_POST['id']=='')
-{
+ }
+ if($_POST['id']=='General' || $_POST['id']=='')
+ {
     $res.="<option value='Volunteer'>Volunteer</option><option  value='Contact'>Contact</option><option  value='Appointment'>Appointment</option><option  value='SeminarRegistrationEnglish'>Seminar Registration English</option><option  value='EpilepsyMasterclass'>Epilepsy Masterclass</option><option  value='AcyanoticHeartDisease'>Acyanotic Heart Disease</option>";
 }
 echo $res;
@@ -250,12 +250,12 @@ public function get_all_edm_data()
 
         $contacts = $this->contact_model->get_all(0, 0);
         foreach ($contacts as $key) {
-         $cnt++;
-         $tme = $key->submit_time;
-         $contacts_ne = $this->contact_model->get_all(1, $tme);
+           $cnt++;
+           $tme = $key->submit_time;
+           $contacts_ne = $this->contact_model->get_all(1, $tme);
           //echo "<pre>";print_r($contacts);
 
-         foreach ($contacts_ne as $row) {
+           foreach ($contacts_ne as $row) {
             if ($row->field_name == 'contact_first_name')
                 $full_name=$row->field_value;
 
@@ -291,10 +291,10 @@ if(($type=='Appointment' || $type=="") && ($category=="General" || $category==""
     $appointment = $this->appointment_model->get_all(0, 0); 
 
     foreach ($appointment as $key) {
-     $cnt++;
-     $tme = $key->submit_time;
-     $appointment_ne = $this->appointment_model->get_all(1, $tme);
-     foreach ($appointment_ne as $row) {
+       $cnt++;
+       $tme = $key->submit_time;
+       $appointment_ne = $this->appointment_model->get_all(1, $tme);
+       foreach ($appointment_ne as $row) {
         if ($row->field_name == 'firstname')
             $full_name=$row->field_value;
 
@@ -328,10 +328,10 @@ else{
 if(($type=='SeminarRegistrationEnglish' || $type=="") && ($category=="General" || $category=="") ){
     $seminar_registration= $this->seminar_registration_model->get_all(0, 0);
     foreach ($seminar_registration as $key) {
-     $cnt++;
-     $tme = $key->submit_time;
-     $seminar_registration_ne = $this->seminar_registration_model->get_all(1, $tme);
-     foreach ($seminar_registration_ne as $row) {
+       $cnt++;
+       $tme = $key->submit_time;
+       $seminar_registration_ne = $this->seminar_registration_model->get_all(1, $tme);
+       foreach ($seminar_registration_ne as $row) {
         if ($row->field_name == 'fullname')
             $full_name=$row->field_value;
 
@@ -365,10 +365,10 @@ else{
 if(($type=='EpilepsyMasterclass' || $type=="") && ($category=="General" || $category=="")  ){
     $epilepsy_masterclass = $this->epilepsy_masterclass_model->get_all(0, 0); 
     foreach ($epilepsy_masterclass as $key) {
-     $cnt++;
-     $tme = $key->submit_time;
-     $epilepsy_masterclass_ne = $this->epilepsy_masterclass_model->get_all(1, $tme);
-     foreach ($epilepsy_masterclass_ne as $row) {
+       $cnt++;
+       $tme = $key->submit_time;
+       $epilepsy_masterclass_ne = $this->epilepsy_masterclass_model->get_all(1, $tme);
+       foreach ($epilepsy_masterclass_ne as $row) {
         if ($row->field_name == 'fullname')
             $full_name=$row->field_value;
 
@@ -402,10 +402,10 @@ else{
 if(($type=='AcyanoticHeartDisease' || $type=="") && ($category=="General" || $category=="") ){
     $acyanotic_heart_disease = $this->acyanotic_heart_disease_model->get_all(0, 0); 
     foreach ($acyanotic_heart_disease as $key) {
-     $cnt++;
-     $tme = $key->submit_time;
-     $acyanotic_heart_disease_ne = $this->acyanotic_heart_disease_model->get_all(1, $tme);
-     foreach ($acyanotic_heart_disease_ne as $row) {
+       $cnt++;
+       $tme = $key->submit_time;
+       $acyanotic_heart_disease_ne = $this->acyanotic_heart_disease_model->get_all(1, $tme);
+       foreach ($acyanotic_heart_disease_ne as $row) {
         if ($row->field_name == 'fullname')
             $full_name=$row->field_value;
 
@@ -464,9 +464,9 @@ if($type!='Volunteer' && $type!='Contact'&& $type!='Appointment'&& $type!='Semin
         $edmlist=$this->edm_model->get_all(0);
 
     foreach ($edmlist as $key) {
-     $cnt++;
+       $cnt++;
      // $arr2[]=array(
-     array_push($full_arr,array(
+       array_push($full_arr,array(
         $cnt, 
         $key->full_name,
         $key->gender,
@@ -474,8 +474,8 @@ if($type!='Volunteer' && $type!='Contact'&& $type!='Appointment'&& $type!='Semin
         $key->phone,
         $key->email
     )
- ); 
- }
+   ); 
+   }
 }
 echo json_encode($full_arr);
 }
@@ -513,13 +513,250 @@ public function import_excel_edm_contact()
           //loop from first data untill last data
          for($i=2;$i<=$totalrows;$i++)
          {
-             $FirstName= $objWorksheet->getCellByColumnAndRow(0,$i)->getValue();           
+           $FirstName= $objWorksheet->getCellByColumnAndRow(0,$i)->getValue();           
              $Email= $objWorksheet->getCellByColumnAndRow(1,$i)->getValue(); //Excel Column 1
              $Mobile= $objWorksheet->getCellByColumnAndRow(2,$i)->getValue(); //Excel Column 2
              $data_user[]=array('entry_time' => date('Y-m-d H:i:s'),'full_name'=>$FirstName ,'email'=>$Email ,'phone'=>$Mobile , 'category_id'=>$result);
-          }
-              $result = $this->edm_model->add($data_user);
+         }
+         $result = $this->edm_model->add($data_user);
              //unlink('././uploads/excel/'.$file_name); //File Deleted After uploading in database .       
-             redirect($base_url. "edm_add_contact");
+         redirect($base_url. "edm_add_contact");
+     }
+     public function email_send_images()
+     {
+        echo "<pre>";
+        print_r($_POST);
+        print_r($_FILES);
+        $emails=$this->input->post('emails');
+        $config['upload_path']          = './uploads/mail';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+        $config['max_size']             = 100;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+        if ( ! $this->upload->do_upload('new_mail_image'))
+        {
+            $error = array('error' => $this->upload->display_errors());
+            print_r($error);
+        }
+        else
+        {
+         $upload_data = $this->upload->data();
+         $file_name = $upload_data['file_name'];
+
+         $arr=array(
+            'date_time' => date('Y-m-d H:i:s'),
+            'emails' => $emails,                    
+            'last_id' => $this->input->post('last_id'),                    
+            'image_name' => $file_name
+        );
+         $result = $this->edm_model->add_new_email($arr);
+     } 
+     $arr= explode(",",$emails);
+     $emails=array();
+     foreach ($arr as $s) {
+       $emails[]= $s;
+   }
+   echo "<pre>";
+   print_r($emails);
+
+   $data['sender_mail'] = 'test@gmail.com';
+   $data['image_name']=$file_name;
+   $this->load->library('email');
+   $config = array (
+      'mailtype' => 'html',
+      'charset'  => 'utf-8',
+      'priority' => '1'
+  );
+   $this->email->initialize($config);
+   $this->email->from($data['sender_mail'], 'Anas');
+   $this->email->to($emails);
+   $this->email->subject('Testing');
+   $message=$this->load->view('email_temapltes',$data,TRUE);
+   $this->email->message($message);
+   $this->email->send(); 
+   echo $this->email->print_debugger();
+}
+
+
+
+public function email_mail_send_new()
+{
+    
+        $emails=$this->input->post('emails');
+        $config['upload_path']          = './uploads/mail/';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+        $config['max_size']             = 1000;
+
+        $this->load->library('upload', $config);
+        if ( ! $this->upload->do_upload('new_mail_image'))
+        {
+            $error = array('error' => $this->upload->display_errors());
+            print_r($error);
+        }
+        else
+        {
+         $upload_data = $this->upload->data();
+         $file_name = $upload_data['file_name'];
+         $arr=array(
+            'date_time' => date('Y-m-d H:i:s'),
+            'emails' => $emails,                    
+            'last_id' => $this->input->post('last_id'),                    
+            'image_name' => $file_name
+        );
+         $result = $this->edm_model->add_new_email($arr);
       }
-  }
+     $arr= explode(",",$emails);
+     $emailsn=array();
+     foreach ($arr as $s) {
+       $emailsn[]= array( "email" => "$s");
+      }
+$this->load->config('mandrill');
+$this->load->library('mandrill');
+$mandrill_ready = NULL;
+try {
+    $this->mandrill->init($this->config->item('mandrill_api_key'));
+    $mandrill_ready = TRUE;
+} catch (Mandrill_Exception $e) {
+    $mandrill_ready = FALSE;
+}
+
+if ($mandrill_ready) {
+     $temlate_name= 'ajch_polices_new';
+    // $temlate_name= 'ajch_policies';
+   // $temlate_name= 'new_mail_edm';
+     //$subject = "<a href='google.com'><img src='http://aljalilachildrens.ae/ajch-dashboard/uploads/mail/".$file_name."' width='100%' height='100%'></a>";
+    //$subject ="<a href='http://aljalilachildrens.ae/ajch-dashboard/uploads/mail/".$file_name."'><button>click to open</button></a>";
+    $subject="";
+    $template_content = array(
+        array('name' =>'sub' ,'content'=> $subject)
+    );
+    $email = array(
+                    'html' => '<p>Example HTML content</p>', //Consider using a view file
+                    'text' => 'This is my plaintext message',
+                    'subject' => 'test',
+                    'from_email' => 'mail@media.ajch.ae',
+                    'from_name' => 'aljalilachildrens',
+                    'to' => $emailsn
+                );
+    $result = $this->mandrill->messages_send_template($temlate_name,$template_content,$email);
+}
+foreach ($result as $arr) {
+
+    $qry[]=array(
+        'email'=>$arr['email'],
+        'status'=>$arr['status'],
+        'eamil_id'=>$arr['_id'],
+        'campaign_id'=>$_POST['last_id']
+    );
+}
+
+$this->campaign_model->add_mail_details($qry);
+$msg="Mail Send Sucessfully";
+$this->session->set_flashdata('messsage', $msg);
+ redirect('campaign');
+}
+
+public function residency_registrartion()
+{
+    $data['msg'] = '';
+    $data['title'] = 'Residency Registrartion';
+    $this->load->view('residency/residency_registrartion', $data);
+}
+public function get_all_residency_registrartion()
+{
+   $full_arr= array();
+    $cnt = 0;
+    $residency_registrartion = $this->edm_model->get_all_residency_registrartion();
+        foreach ($residency_registrartion as $key) {
+            $cnt++;
+            array_push($full_arr,array(
+                $cnt,
+                $key->username,
+                $key->email
+            )
+        );
+        }
+        echo json_encode($full_arr);
+}
+public function appliying_application_mail_send()
+{
+    $application = $this->edm_model->get_all_residency_registrartion();
+   // foreach ($application as $key) {
+   //  if($key->email!='')
+   //  $email[]=array( "email" => "$key->email");
+   // }
+
+   $email[]=array("email" => "anas@nextgbl.com"); 
+$this->load->config('mandrill');
+$this->load->library('mandrill');
+$mandrill_ready = NULL;
+try {
+    $this->mandrill->init($this->config->item('mandrill_api_key'));
+    $mandrill_ready = TRUE;
+} catch (Mandrill_Exception $e) {
+    $mandrill_ready = FALSE;
+}
+if ($mandrill_ready) {
+    $temlate_name= 'residency_appliying';
+    $subject=$_POST['subject'];
+    $body=$_POST['messageinput'];
+    $template_content = array(
+        array('name' =>'sub' ,'content'=> $subject),
+        array('name' =>'body' ,'content'=> $body)
+    );
+    $emailsn = array(
+                    'html' => '<p>Example HTML content</p>', //Consider using a view file
+                    'text' => 'This is my plaintext message',
+                    'subject' => 'test',
+                    'from_email' => 'mail@media.ajch.ae',
+                    'from_name' => 'aljalilachildrens',
+                    'to' => $email
+                );
+    $result = $this->mandrill->messages_send_template($temlate_name,$template_content,$emailsn);
+}
+foreach ($result as $arr) {
+    $qry[]=array(
+        'email'=>$arr['email'],
+        'status'=>$arr['status'],
+        'eamil_id'=>$arr['_id'],
+        'campaign_id'=>1
+    );
+}
+$this->campaign_model->add_mail_details($qry);
+$msg="Mail Send Sucessfully";
+$this->session->set_flashdata('messsage', $msg);
+header('Location:residency_registrartion');
+}
+public function get_edm_contact()
+{
+    $id=$_POST['val'];
+    $resu=$this->edm_model->get_all($id);
+    $res=array_reverse($resu);
+    $cnt=0;
+    $arr="<table class='table dataTables-example'>";
+    $arr.="<thead style='background-color:#115E6E;color:#ffff;'>";
+    $arr.="<tr>";
+    $arr.="<th>Slno</th>";
+    $arr.="<th>Name</th>";
+    $arr.="<th>Gender</th>";
+    $arr.="<th>Nationality</th>";
+    $arr.="<th>Phone</th>";
+    $arr.="<th>Email</th>";
+    $arr.="</thead><tbody></tr>";
+foreach ($res as $key) {
+    $cnt++;
+    $arr.="<tr>";
+    $arr.="<td>$cnt</td>";
+    $arr.="<td>$key->full_name</td>";
+    $arr.="<td>$key->gender</td>";
+    $arr.="<td>$key->Nationality</td>";
+    $arr.="<td>$key->phone</td>";
+    $arr.="<td>$key->email</td>";
+    $arr.="</tr>";
+}
+$arr.="</tbody></table>";
+echo $arr;
+}
+}

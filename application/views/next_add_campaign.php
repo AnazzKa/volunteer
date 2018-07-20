@@ -36,15 +36,18 @@
                                     <div class="pull-right">
                                     
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-primary"  id="envelope" href="#signup" data-toggle="modal" data-target=".bs-modal-md">Send</button>                                        
+                                        <button type="button" class="btn btn-primary"  id="envelope" href="#signup" data-toggle="modal" data-target=".send_old">Send</button>
+                                    </div> 
+                                    <!-- <div class="btn-group">
+                                        <button type="button" class="btn btn-primary"  id="new_mail" href="#new_mail" data-toggle="modal" data-target=".new_mail">Send new</button>
+                                    </div> --> 
                                     </div>
-                                
+                                     
+
                                 </div>                       
                                 </div>
                                  <!-- Modal -->
-                                
-
-<div class="modal fade bs-modal-md" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal fade bs-modal-md send_old" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
         <br>
@@ -66,6 +69,11 @@
                     <option value="">Default</option>
                     <option value="HeartEDM">Heart EDM</option>
                     <option value="HeartSeminarEDM">Heart Seminar EDM</option>
+                    <option value="ajch_polices_new">AJCH Polices</option>
+                    <option value="ppt_template_test">Test Template</option>
+                    <option value="design_approval">Admission Timeline</option>
+                    <option value="link_count_checking">link_count_checking</option>
+                    <option value="mail_new_temp">Body and image</option>
                 </select>
               </div>
             </div>            
@@ -101,12 +109,12 @@
   </div>
 </div>
 <!-- model box end -->
-                                                <div class="ibox-content">
 
-                                                    <div style="position:absolute;
-    left:40%;
-    ">
-                                                        
+<!-- Modal -->
+
+<!-- model box end -->
+ <div class="ibox-content">
+<div style="position:absolute;left:40%;">                                                   
  <style>
 .loader {
   border: 16px solid #f3f3f3;
@@ -133,8 +141,8 @@
 <div class="loader"></div>
 
                                                     </div>
-                                                    <div class="table-responsive" id="dvContents" hidden="">
-                                                        <table class="table dataTables-example" >
+                                                    <div class="" id="dvContents" hidden="">
+                                                        <table class="table">
                                                             <thead style="background-color:#115E6E;color:#ffff;">
                                                                 <tr>
                                                                     <th>#</th>                                                       
@@ -168,7 +176,40 @@
                                                                 <!-- volunteer end -->
                                                                 <!-- edm start -->
                                                                 <?php
+                                                                if($sub_category_new!=""){
+                                                                foreach ($sub_category_new as $row) {
+                                                                $cnt++;
+                                                                ?>
+                                                                <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
+                                                                    <td><?php echo $cnt; ?></td>
+                                                                    <td><input type="checkbox" name="vol[]" checked value="<?php echo $row->email; ?>"></td>
+                                                                    <td><?php echo $row->first_name; ?></td>
+                                                                    <td><?php echo $row->gender; ?></td>
+                                                                    <td><?php echo $row->nationality; ?></td>
+                                                                    <td><?php echo $row->mobile_no; ?></td>
+                                                                    <td><?php echo $row->email; ?></td>
 
+                                                                </tr>   
+                                                                <?php } } ?>
+                                                                <?php
+                                                                if($sub_category!=""){
+                                                                foreach ($sub_category as $row) {
+                                                                $cnt++;
+                                                                ?>
+                                                                <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
+                                                                    <td><?php echo $cnt; ?></td>
+                                                                    <td><input type="checkbox" name="vol[]" checked value="<?php echo $row->email; ?>"></td>
+                                                                    <td><?php echo $row->username; ?></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td><?php echo $row->email; ?></td>
+
+                                                                </tr>   
+                                                                <?php } } ?>
+                                                                <!-- edm end -->
+                                                                <!-- edm start -->
+                                                                <?php
                                                                 if($edmlist!=""){
                                                                 foreach ($edmlist as $row) {
                                                                 $cnt++;
@@ -176,7 +217,7 @@
                                                                 <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
                                                                     <td><?php echo $cnt; ?></td>
                                                                     <td><input type="checkbox" name="vol[]" checked value="<?php echo $row->email; ?>"></td>
-                                                                    <td><?php echo $row->full_name; ?></td>                    
+                                                                    <td><?php echo $row->full_name; ?></td>
                                                                     <td><?php echo $row->gender; ?></td>
                                                                     <td><?php echo $row->Nationality; ?></td>
                                                                     <td><?php echo $row->phone; ?></td>
@@ -392,17 +433,7 @@
                             <?php } } ?>
                             <!-- acyanotic seminar end  -->
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>#</th>                                                       
-                                <th>#</th>                                                       
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Nationality</th>
-                                <th>Phone</th>
-                                <th>Email</th>                                                        
-                            </tr>
-                        </tfoot>
+                        
                     </table>
                 </div>
 
@@ -412,7 +443,7 @@
 </div>
 </div>
 
-</div>
+
 <?php $this->load->view('footer'); ?>
 </div>
 
@@ -442,16 +473,7 @@ setTimeout(function() {
             }, 1300);
          <?php } ?>
 
-        $('.dataTables-example').DataTable({
-            "columnDefs": [{
-                            "targets": [0,1, 2, 3, 4, 5,6], // column or columns numbers
-                            "orderable": false,
-                            // set orderable for selected columns   
-                        }],
 
-                        "processing": true                 
-
-                    });
 
         
         $('#envelope').on('click',function(){
@@ -461,9 +483,19 @@ setTimeout(function() {
           val[i] = $(this).val();
         });
           $('#emails').val(val);  
+        }); 
+        $('#new_mail').on('click',function(){
+
+            var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
         });
+          $('#new_emails').val(val);  
+        });
+
         
     });
+    
 </script>
 
 </body>

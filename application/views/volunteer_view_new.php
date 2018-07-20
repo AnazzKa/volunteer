@@ -12,7 +12,11 @@
         <link href="<?php $base_url; ?>assets/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
         <link href="<?php $base_url; ?>assets/css/animate.css" rel="stylesheet">
         <link href="<?php $base_url; ?>assets/css/style.css" rel="stylesheet">
-
+<style type="text/css">
+                                                                    .pen{
+                                                                            background-color: yellow !important;color: black !important;
+                                                                    }
+                                                                </style>
     </head>
 
     <body>
@@ -35,11 +39,11 @@
 
                                     <div class="ibox-content col-md-12">
                                         <div class="form-group col-md-4">                                    
-                                            <input  type="text" placeholder="From Date" onfocus="(this.type = 'date')"  value="<?php echo $f_date; ?>" name="f_date" class="form-control">                                            
+                                            <input  type="text" placeholder="From Date" onfocus="(this.type = 'date')"  value="<?php echo $f_date; ?>" id="f_date" name="f_date" class="form-control">                                            
                                         </div>
 
                                         <div class="form-group col-md-4">                                    
-                                            <input onchange="this.form.submit()" type="text" placeholder="To Date" onfocus="(this.type = 'date')"  value="<?php echo $t_date; ?>" name="t_date" class="form-control">                                            
+                                            <input  type="text" placeholder="To Date" onfocus="(this.type = 'date')"  value="<?php echo $t_date; ?>" name="t_date" id="t_date" class="form-control">                                            
                                         </div>
                                         <div class="form-group col-md-4">                                    
                                             <!--<select onchange="this.form.submit()"  name="gender" class="form-control">-->
@@ -94,7 +98,7 @@
 
                                     <div class="ibox-content">
                                         <div class="table-responsive" id="dvContents">
-                                            <table class="table dataTables-example" >
+                                            <table class="table dataTables-example" id="example">
                                                 <thead style="background-color:#115E6E;color:#ffff;">
                                                     <tr>
                                                         <th>Sl</th>
@@ -110,70 +114,7 @@
                                                         <th>#</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    
-                                                    <?php
-                                                    $cnt = 0;
-                                                    foreach ($volunteer as $row) {
-                                                        $cnt++;
-                                                        ?>
-                                                        <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
-                                                            <td><?php echo $cnt; ?></td>
-                                                            <td><?php
-                                                                $dat = $row->time;
-                                                                $arr = explode("-", $dat);
-                                                                $aarr = explode(" ", $arr[2]);
-                                                                echo $aarr[0] . "-" . $arr[1] . "-" . $arr[0];
-                                                                ?></td>
-                                                            <td><?php echo $row->firstname; ?></td>                    
-                                                            <td><?php echo $row->gender; ?></td>
-                                                            <td><?php echo $row->nationality; ?></td>
-                                                            <td><?php echo $row->phone; ?></td>
-                                                            <td><?php echo $row->email; ?></td>
-                                                            <td>
-                                                                <?php
-                                                                if($row->seleted_or_not==0){
-                                                                    $sts="Registered";     
-                                                                $st_lbl="label label-default";
-                                                                 }
-                                                                if($row->seleted_or_not==1){
-                                                                     $sts="Approved";
-                                                                     $st_lbl="label label-warning";
-                                                                  }
-                                                                 if($row->seleted_or_not==2){
-                                                                     $sts="Active";
-                                                                     $st_lbl="label label-primary";
-                                                                  }
-                                                                 if($row->seleted_or_not==3){
-                                                                     $sts="In Active";
-                                                                     $st_lbl="label label-success";
-                                                                  }
-                                                                 if($row->seleted_or_not==4){
-                                                                     $sts="Canceled  ";
-                                                                     $st_lbl="label label-danger";
-                                                                  }
-                                                                 if($row->seleted_or_not==5){
-                                                                     $sts="Pending";
-                                                                     $st_lbl="label label-default pen";
-                                                                  }
-                                                                ?>
-                                                                <style type="text/css">
-                                                                    .pen{
-                                                                            background-color: yellow !important;color: black !important;
-                                                                    }
-                                                                </style>
-                                                                <span class="<?php echo $st_lbl ?>"><?php echo $sts; ?></span>
-                                                            </td>                    
-                                                            <td><?php echo $row->superpower; ?></td>
-                                                            <td>
-                                                                <a href="<?php $base_url ?>profile?id=<?php echo my_simple_crypt($row->id,'e'); ?>"><i class="fa fa-address-book fa-2x"></i></a>  
-                                                            </td>
-                                                        </tr>   
-                                                    <?php } ?>
-
-
-
-                                                </tbody>
+                                                
                                                 <tfoot>
                                                     <tr>
                                                         <th>Sl</th>
@@ -206,35 +147,42 @@
         <?php $this->load->view('script'); ?>
         <script>
             $(document).ready(function () {
-                //var table = $('.dataTables-example').DataTable();
-
-                $('.dataTables-example').DataTable({
-                    "columnDefs": [{
-                            "targets": [0, 2, 3, 4, 5, 6, 7, 8], // column or columns numbers
-                            "orderable": false, // set orderable for selected columns                            
-                        }]
-
-
-                });
+                var status=<?php echo $status; ?>;
+ var table = $('#example').DataTable();        
+                    $.ajax({type: "POST",url: "<?php $base_url ?>get_all_volunteer",data:{status:status}, success: function(result){
+              console.log(result);
+             var res=JSON.parse(result);
+             table.rows.add(res).draw();
+         }
+     });
+            
                 $("#super_power").on("change", function () {
-                    var value = $(this).val().toLowerCase();
-                    $(".dataTables-example tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
+                    table.columns(8).search(this.value).draw();
                 });
                 $("#nationality").on("change", function () {
-                    var value = $(this).val().toLowerCase();
-                    $(".dataTables-example tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
+                    table.columns(4).search(this.value).draw();
                 });
                 $('#gender').change( function() {
                     var val=this.value;
                     if(val!='')
-                        $('.dataTables-example').DataTable().columns(3).search("^" +val+ "$", true, false, true).draw();
+                        table.columns(3).search("^" +val+ "$", true, false, true).draw();
                     else
-                        $('.dataTables-example').DataTable().columns(3).search(this.value).draw();
+                        table.columns(3).search(this.value).draw();
                 } );
+                $('#t_date').on('change',function(){
+                  var t_date =this.value;
+                  var f_date=$('#f_date').val();
+                  console.log(f_date);
+                 var status=<?php echo $status; ?>;
+ var table = $('#example').DataTable();        
+                    $.ajax({type: "POST",url: "<?php $base_url ?>get_all_volunteer",data:{status:status,t_date:t_date,f_date:f_date}, success: function(result){
+              console.log(result);
+             var res=JSON.parse(result);
+             table.clear().draw();
+             table.rows.add(res).draw();
+         }
+     });
+                });
             });
         </script>
 

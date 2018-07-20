@@ -203,7 +203,15 @@
                         <button class="btn btn-sm btn-primary pull-right" type="submit" name="save">Save</button>
                     </div> 
 </form>
+
+
             </div>
+<div class="row">
+    <div class="table-responsive" id="table">
+                                            
+</div>
+</div>
+
         </div>
     </div>
 </div>
@@ -249,6 +257,15 @@
          });
         });
 
+
+        $('#category').on('change',function () {
+            $.ajax({type: "POST",url: "get_edm_contact",data:{val:this.value}, success: function(result){
+            $('.table-responsive').empty();
+            $('.table-responsive').append(result);
+         }
+     });
+        });
+
     });
 function copypaste(id)
 {
@@ -270,6 +287,7 @@ function remove(id)
 {
 $( "#fdiv"+id ).remove();
 }
+
 </script>
 </body>
 </html>

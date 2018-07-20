@@ -49,7 +49,8 @@
                                                 <th>Date</th>
                                                 <th>Time</th>
                                                 <th>campaign Name</th>
-                                                <th>Discription</th>
+                                                <th>Total Mails</th>
+                                                <th>Delivered</th>                                       
                                                 <th>#</th>                                                  
                                             </tr>
                                         </thead>
@@ -60,6 +61,9 @@
 
                                             foreach ($campaign as $row) {
                                                 $cnt++;
+                                                $id=$row->campaignid;
+                                                $data['mails'] = $this->campaign_model->get_mails($id);
+                                                $data['delivary_cnt']=$this->campaign_model->get_count($id,'sent');
                                                 ?>
                                                 
                                                     <tr <?php if ($cnt % 2 == 0) { ?>class="gradeX" <?php } else { ?>class="gradeA" <?php } ?> >
@@ -67,7 +71,8 @@
                                                         <td><?php  $dat = $row->time;$arr = explode("-", $dat);$aarr = explode(" ", $arr[2]);echo $aarr[0] . "-" . $arr[1] . "-" . $arr[0];  ?> </td>                    
                                                         <td><?php  $dat = $row->time;$aarr = explode(" ", $dat);echo $aarr[1]  ?></td>                    
                                                         <td><?php echo $row->campaign_name; ?></td>
-                                                        <td><?php echo $row->description; ?></td>
+                                                        <td><span class="label label-success"><?php echo count($data['mails']); ?></span></td>
+                                                        <td><span class="label label-primary"><?php echo $data['delivary_cnt'][0]->cnt; ?></span></td>
                                                         <td><a href="<?php $base_url; ?>view_campaign_details?camp=<?php echo my_simple_crypt($row->campaignid,'e'); ?>"><button class="btn btn-primary"><i class="fa fa-arrow-right"></i></button></a></td>                                                   
                                                     </tr>
                                                  
@@ -79,8 +84,9 @@
                                                     <th>Date</th>
                                                     <th>Time</th>
                                                     <th>campaign Name</th>
-                                                    <th>Discription</th>
-                                                    <th>#</th>                                                          
+                                                    <th>Total Mails</th>
+                                                    <th>Delivered</th>                                       
+                                                    <th>#</th>                                                           
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -126,10 +132,10 @@
                     };
                     toastr.success('Done','<?php echo $this->session->flashdata('messsage'); ?>');
                 }, 1300);
-                   <?php } ?>
+                   <?php $this->session->flashdata('messsage',''); } ?>
                    $('.dataTables-example').DataTable({
                     "columnDefs": [{
-                            "targets": [0,1, 2, 3,4], // column or columns numbers
+                            "targets": [0,1, 2, 3,4,5,6], // column or columns numbers
                             "orderable": false, // set orderable for selected columns                            
                         }]
                     });

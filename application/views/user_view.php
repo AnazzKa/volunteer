@@ -14,41 +14,31 @@
         <link href="<?php $base_url; ?>assets/css/style.css" rel="stylesheet">
         <script src="<?php $base_url; ?>assets/time_ago.js"></script>
     </head>
-
     <body>
-
         <div id="wrapper">
-
             <?php $this->load->view('menu'); ?>
-
             <div id="page-wrapper" class="gray-bg">
                 <?php $this->load->view('header'); ?>
-
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
                                     <h5>Users Details</h5>
-
                                 </div>
                                 <?php if(!empty($users)){ ?>
                                 <div class="ibox-content">
-
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead style="background-color:#115E6E;color:#ffff;">
                                                 <tr>
                                                     <th>Sl</th>                                     
                                                     <th>Name</th>
-                                                    
                                                     <th>Email</th>
-                                                    
                                                     <th>#</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                 
+                                            <tbody>  
                                                 <?php
                                                 $cnt = 0;
                                                 foreach ($users as $row) {

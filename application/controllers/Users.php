@@ -105,9 +105,10 @@ class Users extends CI_Controller {
                     $data['s_sort'] = 'ASC';
             }
         }
+        $data['status']=0;
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $data['nationality'] = $this->users_model->get_nationality();
-        $this->load->view('volunteer_view', $data);
+        $this->load->view('volunteer_view_new', $data);
     }
     public function selected_volunteers() {
 
@@ -154,6 +155,7 @@ class Users extends CI_Controller {
                     $data['s_sort'] = 'ASC';
             }
         }
+        $data['status']=1;
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('volunteer_view', $data);
@@ -202,6 +204,7 @@ class Users extends CI_Controller {
                     $data['s_sort'] = 'ASC';
             }
         }
+        $data['status']=2;
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('volunteer_view', $data);
@@ -251,6 +254,7 @@ class Users extends CI_Controller {
                     $data['s_sort'] = 'ASC';
             }
         }
+        $data['status']=3;
         $data['volunteer'] = $this->users_model->get_volunteer($query);
         $data['nationality'] = $this->users_model->get_nationality();
         $this->load->view('volunteer_view', $data);
@@ -342,9 +346,12 @@ class Users extends CI_Controller {
     }
     public function volunteer_exsl()
     {
-$str = $_REQUEST['id'];
+            $str = $_REQUEST['id'];
             $id = my_simple_crypt($str, 'd');
+            if($id!=0)
             $query = "SELECT * FROM `al_volunteer` WHERE `id`!='' and seleted_or_not='" . $id . "'";
+        else
+            $query = "SELECT * FROM `al_volunteer` WHERE `id`!=''";
         // create file name
         $fileName = 'data-'.time().'.xlsx';  
         // load excel library
@@ -354,37 +361,40 @@ $str = $_REQUEST['id'];
         $objPHPExcel->setActiveSheetIndex(0);
         // set Header
         $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Slno');
-        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Date');
-        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Date Of Birth');
-        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Name');
-        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Gender');
-        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Nationality');
-        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Phone');       
-        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Email');       
-        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Super Power');       
-        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'About jalila');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'First Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Middle Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Last Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Date Of Birth');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Gender');
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Nationality');
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Phone');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Email');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Super Power');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'About jalila');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Emirates ID');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Passport Copy');       
         // set Row
         $rowCount = 2;$cnt = 0;
         foreach ($empInfo as $element) {
             $cnt++;
-            $dat = $element->time;
-            $arr = explode("-", $dat);
-            $aarr = explode(" ", $arr[2]);
-            $date= $aarr[0] . "-" . $arr[1] . "-" . $arr[0];
-            $name=$element->firstname." ".$element->middlename." ".$element->lastname;
- $dat1 = $element->birthday;
-$arr1=explode("-", $dat1);;
-$dob=$arr1[2] . "-" . $arr1[1] . "-" . $arr1[0];
+            $dat1 = $element->birthday;
+            if($dat1!='')
+            $dob = date("d-M-Y",$dat1);
+        else
+            $dob='';
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $cnt);            
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $date);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $dob);
-            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $name);
-            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element->gender);
-            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element->nationality);
-            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element->phone);
-            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element->email);
-            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element->superpower);
-            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element->about_jalila);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element->firstname);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element->middlename);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element->lastname);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $dob);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element->gender);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element->nationality);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element->phone);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element->email);
+            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element->superpower);
+            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element->about_jalila);
+            $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element->emirates_id);
+            $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element->passport_copy);
     
             $rowCount++;
         }
@@ -400,5 +410,95 @@ $dob=$arr1[2] . "-" . $arr1[1] . "-" . $arr1[0];
         //download file
         // header("Content-Type: application/vnd.ms-excel");
         // redirect('uploads'.$fileName); 
+    }
+    public function get_all_volunteer()
+    {
+       
+    $status=$_POST['status'];
+    if($status==0)
+         $query = "SELECT * FROM `al_volunteer` WHERE `id`!='' ";
+     else
+$query.=" and seleted_or_not=$status ";
+
+    if(isset($_POST['t_date']))
+    $t_date=$_POST['t_date'];
+else
+    $t_date='';
+    if(isset($_POST['f_date']))
+    $f_date=$_POST['f_date'];
+else
+$f_date='';
+            if ($f_date != "" && $t_date == "")
+                $query .= " and `time`='$f_date'";
+            if ($f_date == "" && $t_date != "")
+                $query .= " and `time`='$t_date'";
+            if ($f_date != "" && $t_date != "")
+                $query .= " and (`time` BETWEEN  '$f_date' and '$t_date') ";
+
+$query.="ORDER BY `time` ASC ";
+    $full_arr= array();
+    $cnt = 0;
+    // if(($type=='Volunteer' || $type=="") && ($category=="General" || $category=="")  ){
+        $volunteer = $this->users_model->get_volunteer($query);
+        foreach ($volunteer as $key) {
+            $cnt++;
+            // $arr1[]=array(
+            $dat = $key->time;
+            $arr = explode("-", $dat);
+            $aarr = explode(" ", $arr[2]);
+           if($key->seleted_or_not==0){
+                                                                    $sts="Registered";     
+                                                                $st_lbl="label label-default";
+                                                                 }
+                                                                if($key->seleted_or_not==1){
+                                                                     $sts="Approved";
+                                                                     $st_lbl="label label-warning";
+                                                                  }
+                                                                 if($key->seleted_or_not==2){
+                                                                     $sts="Active";
+                                                                     $st_lbl="label label-primary";
+                                                                  }
+                                                                 if($key->seleted_or_not==3){
+                                                                     $sts="In Active";
+                                                                     $st_lbl="label label-success";
+                                                                  }
+                                                                 if($key->seleted_or_not==4){
+                                                                     $sts="Canceled  ";
+                                                                     $st_lbl="label label-danger";
+                                                                  }
+                                                                 if($key->seleted_or_not==5){
+                                                                     $sts="Pending";
+                                                                     $st_lbl="label label-default pen";
+                                                                  }  
+$label="<span class='";
+$label.=$st_lbl;
+$label.="'>";
+$label.=$sts;
+$label.="</span>";
+$action="<a href='profile?id=";
+$action.= my_simple_crypt($key->id,'e');
+$action.="'><i class='fa fa-address-book fa-2x'></i></a>";
+
+
+
+            array_push($full_arr,array(
+                $cnt,
+                $aarr[0] . "-" . $arr[1] . "-" . $arr[0],
+                $key->firstname,
+                $key->gender,
+                $key->nationality,
+                $key->phone,
+                $key->email,
+                $label,
+                $key->superpower,
+                $action
+            )
+        );
+        }
+    // }
+    // else{
+        //$arr1[]=array();
+    // }
+        echo json_encode($full_arr);
     }
 }

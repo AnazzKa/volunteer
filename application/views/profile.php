@@ -142,6 +142,14 @@
                                     $watermark = "<img src='assets/img/pro_3.jpg' width='50%' height='50%'>";
                                     $reminder = $volunteer[0]->reminder_in;
                                 }
+                                if ($volunteer[0]->seleted_or_not == 4) {
+                                    $watermark = "<img src='assets/img/cancelled.jpg' width='50%' height='50%'>";
+                                    $reminder = $volunteer[0]->reminder_in;
+                                }
+                                if ($volunteer[0]->seleted_or_not == 5) {
+                                    $watermark = "<img src='assets/img/pending.jpg' width='50%' height='50%'>";
+                                    $reminder = $volunteer[0]->reminder_in;
+                                }
                                 ?>
                                 <div class="watermark">
                                     <?php echo $watermark ?>
@@ -157,7 +165,11 @@
                                         <?php } if ($this->session->userdata('designation_id') == 2 || $this->session->userdata('designation_id') == 0) { ?>
                                             <option <?php if ($volunteer[0]->seleted_or_not == 2) { ?>selected <?php } ?> value="2">Active</option>
                                         <?php } if ($this->session->userdata('designation_id') == 0) { ?>
-                                            <option <?php if ($volunteer[0]->seleted_or_not == 3) { ?>selected <?php } ?> value="3">InActive</option>
+                                            <option <?php if ($volunteer[0]->seleted_or_not == 3) { ?>selected <?php } ?> value="3">InActive</option>                                        
+                                        <?php } if ($this->session->userdata('designation_id') == 0) { ?>
+                                            <option <?php if ($volunteer[0]->seleted_or_not == 4) { ?>selected <?php } ?> value="4">Canceled</option>                                                            
+                                        <?php } if ($this->session->userdata('designation_id') == 0) { ?>
+                                            <option <?php if ($volunteer[0]->seleted_or_not == 5) { ?>selected <?php } ?> value="5">Pending for Security</option>
                                         <?php } ?>
                                     </select> 
                                     
@@ -204,7 +216,8 @@
 <br>
                                     <!-- <form action="" method="post"> -->
                                         <input type="hidden" value="<?php echo $volunteer[0]->id ?>" name="volunteer_id" >                                                                            <h3  style="color:#115E6E;"> <strong>Notes</strong> </h3>
-                                        <textarea placeholder="Notes" name="reminder" id="reminder"  class="form-control" ></textarea>                                        
+                                        <textarea placeholder="Notes" name="reminder" id="reminder"  class="form-control" ></textarea>
+                                        <p id="commnts_error" hidden style="color: red">Please Fill</p>                                        
                                         <input onclick="comments(<?php echo $volunteer[0]->id ?>)" name="rem_btn" value="Save" class="btn btn-primary pull-right" >
                                     <!-- </form> -->
 
@@ -276,8 +289,10 @@
     <script src="<?php $base_url; ?>assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
     <script type="text/javascript">
         function comments(volun) {
-            $('#comm').empty();
             var reminder=$('#reminder').val();
+            if(reminder!=''){
+                $('#commnts_error').hide();
+            $('#comm').empty();
             var pro='<?php  echo $_REQUEST['id'];   ?>';
             $.ajax({
         type: "POST",
@@ -291,6 +306,9 @@
 $('#reminder').val('');
         }
     });
+        }else{
+$('#commnts_error').show();
+        }
         }
     </script>
     

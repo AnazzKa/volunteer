@@ -49,6 +49,7 @@ $route['previlage'] = 'Users/previlage';
 $route['selected_volunteers'] = 'Users/selected_volunteers';
 $route['volunteer_print'] = 'Users/volunteer_print';
 $route['volunteer_exsl'] = 'Users/volunteer_exsl';
+$route['get_all_volunteer'] = 'Users/get_all_volunteer';
 $route['profile_print'] = 'Profile/profile_print';
 $route['contact'] = 'Contact';
 $route['contact_single_view'] = 'Contact/contact_single_view';
@@ -73,10 +74,18 @@ $route['next_add_capmaign'] = 'Campaign/next_add_capmaign';
 $route['campaign_mail_send'] = 'Campaign/campaign_mail_send';
 $route['view_campaign_details'] = 'Campaign/view_campaign_details';
 $route['get_email_open_count'] = 'Campaign/get_email_open_count';
+$route['campaign_emails_data'] = 'Campaign/campaign_emails_data';
 $route['get_category_options'] = 'Edm/get_category_options';
 $route['edm_dashboard'] = 'Edm/edm_dashboard';
 $route['get_all_edm_data'] = 'Edm/get_all_edm_data';
 $route['import_excel_edm_contact'] = 'Edm/import_excel_edm_contact';
+$route['medical_form_submission'] = 'Medical_form_submission';
+$route['email_send_images'] = 'Edm/email_send_images';
+$route['email_mail_send_new'] = 'Edm/email_mail_send_new';
+$route['residency_registrartion'] = 'Edm/residency_registrartion';
+$route['get_all_residency_registrartion'] = 'Edm/get_all_residency_registrartion';
+$route['appliying_application_mail_send'] = 'Edm/appliying_application_mail_send';
+$route['get_edm_contact'] = 'Edm/get_edm_contact';
 $route['404_override'] = '';
 
 

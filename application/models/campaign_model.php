@@ -38,4 +38,14 @@ class Campaign_model extends CI_Model {
         $query = $this->db->query("SELECT COUNT(*) AS 'cnt' FROM `al_campaign_mails` WHERE `campaign_id`=$id and `status`='$sts'");
         return $query->result();
     }
+    public function update_mailing_details($query, $id)
+    {
+        $this->db->where('eamil_id', $id);
+        $this->db->update('al_campaign_mails', $query);
+    }
+    public function get_direct_query($query)
+   {
+     $query = $this->db->query($query);
+        return $query->result();
+   }
 }

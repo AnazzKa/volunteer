@@ -98,8 +98,8 @@
 <script type="text/javascript">
     Morris.Donut({
         element: 'morris-donut-chart',
-        data: [{ label: "Total Edm Contact", value: <?php echo  count($volunteer)+count($contacts)+count($appointment)+count($seminar_registration)+count($epilepsy_masterclass)+count($acyanotic_heart_disease)+count($edmlist); ?> },
-        { label: "Volunteer", value: <?php echo count($volunteer); ?> },
+        data: [{ label: "Total Edm Contact", value: <?php echo  count($contacts)+count($appointment)+count($seminar_registration)+count($epilepsy_masterclass)+count($acyanotic_heart_disease)+count($edmlist); ?> },
+        // { label: "Volunteer", value: <?php echo count($volunteer); ?> },
         { label: "Contact", value: <?php echo count($contacts); ?> } ,
         { label: "Appoinment", value: <?php echo count($appointment); ?> } ,
         { label: "Seminar English", value: <?php echo count($seminar_registration); ?> } ,
